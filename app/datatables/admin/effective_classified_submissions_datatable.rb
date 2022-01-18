@@ -9,7 +9,7 @@ class Admin::EffectiveClassifiedSubmissionsDatatable < Effective::Datatable
 
     col :submitted_at, label: 'Submitted', visible: false, as: :date
 
-    col :submission, search: :string
+    col :classifieds, search: :string
     col :owner
 
     actions_col

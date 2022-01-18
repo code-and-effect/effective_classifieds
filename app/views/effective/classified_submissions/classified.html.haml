@@ -1,0 +1,17 @@
+= render 'layout' do
+  = render 'effective/classified_submissions/content', resource: resource
+
+  .card
+    .card-body
+      = effective_form_with(model: resource, url: wizard_path(step), method: :put) do |f|
+        = f.hidden_field :id
+
+        = f.fields_for :classifieds, f.object.build_classified do |fc|
+          = fc.hidden_field :id
+
+          = fc.hidden_field :owner_id, value: f.object.owner_id
+          = fc.hidden_field :owner_type, value: f.object.owner_type
+
+          = render('effective/classifieds/fields', f: fc, classified: fc.object)
+
+        = f.save 'Save and Continue'

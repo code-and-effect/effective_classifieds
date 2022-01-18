@@ -13,6 +13,8 @@ module Admin
 
       col :id, visible: false
 
+      col :classified_submission, visible: false, search: :string
+
       if categories.present?
         col :category, search: categories
       end

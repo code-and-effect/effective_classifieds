@@ -10,9 +10,7 @@ class EffectiveClassifiedSubmissionsDatatable < Effective::Datatable
       submission.submitted_at&.strftime('%F') || 'Incomplete'
     end
 
-    col :classified, search: :string do |submission|
-      submission.classified.to_s
-    end
+    col :classifieds, search: :string, label: 'Classified'
 
     col :owner, visible: false, search: :string
     col :status, visible: false

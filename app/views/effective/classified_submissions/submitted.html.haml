@@ -1,0 +1,13 @@
+= render 'layout' do
+  = render 'effective/classified_submissions/content', resource: resource
+
+  - raise('expected a submitted classified_submission') unless resource.was_submitted?
+
+  .alert.alert-warning.mb-4
+    Successfully submitted on #{resource.submitted_at.strftime('%F')}.
+
+  = link_to "Return to Dashboard", root_path, class: 'btn btn-lg btn-primary mb-4'
+
+  = render 'effective/classified_submissions/classified_submission', classified_submission: resource
+
+  = link_to "Return to Dashboard", root_path, class: 'btn btn-lg btn-primary'

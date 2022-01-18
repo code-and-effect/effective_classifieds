@@ -1,0 +1,29 @@
+= card('Classified Submission') do
+  - classified = classified_submission.classifieds.first
+
+  %table.table.table-sm
+    %tbody
+      %tr
+        %th.border-0 Classified
+        %td.border-0
+
+          - if classified.published?
+            = link_to(classified, effective_classifieds.classified_path(classified), target: '_blank')
+          - else
+            = classified.presence || 'Classified was deleted'
+
+      - if request.path.start_with?('/admin')
+        %tr
+          %th Submitted by
+          %td
+            - url = (polymorphic_admin_path(classified_submission.owner) rescue "/admin/users/#{classified_submission.owner.to_param}/edit")
+            = link_to(classified_submission.owner, url)
+      - else
+        %tr
+          %th Submitted by
+          %td= classified_submission.owner
+
+      %tr
+        %th Status
+        %td
+          %span.badge.badge-secondary= classified.status

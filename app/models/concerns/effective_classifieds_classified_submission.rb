@@ -21,7 +21,7 @@ module EffectiveClassifiedsClassifiedSubmission
     end
 
     def required_wizard_steps
-      [:start, :classified, :review, :submitted]
+      [:start, :summary, :submitted]
     end
   end
 
@@ -36,7 +36,7 @@ module EffectiveClassifiedsClassifiedSubmission
     acts_as_wizard(
       start: 'Start',
       classified: 'Classified',
-      submit: 'Review',
+      summary: 'Review',
       submitted: 'Submitted'
     )
 
@@ -47,8 +47,8 @@ module EffectiveClassifiedsClassifiedSubmission
     accepts_nested_attributes_for :owner
 
     # Effective Namespace
-    belongs_to :classified, class_name: 'Effective::Classified', optional: true
-    accepts_nested_attributes_for :classified
+    has_many :classifieds, -> { order(:id) }, class_name: 'Effective::Classified', inverse_of: :classified_submission, dependent: :destroy
+    accepts_nested_attributes_for :classifieds, reject_if: :all_blank, allow_destroy: true
 
     effective_resource do
       # Acts as Statused
@@ -64,7 +64,7 @@ module EffectiveClassifiedsClassifiedSubmission
       timestamps
     end
 
-    scope :deep, -> { includes(:owner, :classified) }
+    scope :deep, -> { includes(:owner, :classifieds) }
     scope :sorted, -> { order(:id) }
 
     scope :in_progress, -> { where.not(status: [:submitted]) }
@@ -76,8 +76,8 @@ module EffectiveClassifiedsClassifiedSubmission
     validates :owner, presence: true
 
     # Classified Step
-    validate(if: -> { current_step == :classified }) do
-      validates :classified, presence: true
+    with_options(if: -> { current_step == :classified }) do
+      validates :classifieds, presence: true
     end
 
   end
@@ -93,6 +93,22 @@ module EffectiveClassifiedsClassifiedSubmission
 
   def done?
     submitted?
+  end
+
+  def build_classified
+    classified = classifieds.first
+    classified || classifieds.build(owner: owner)
+  end
+
+  # Called on the Review / Summary Step
+  # But we actually want to submit it
+  def summary!
+    submit!
+  end
+
+  def submit!
+    classifieds.select(&:draft?).each(&:submitted!)
+    submitted!
   end
 
 end

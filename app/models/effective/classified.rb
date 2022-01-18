@@ -10,11 +10,14 @@ module Effective
     log_changes if respond_to?(:log_changes)
     acts_as_role_restricted if respond_to?(:acts_as_role_restricted)
 
+    # This will be the owner of the classified submission
+    # Or the admin user that created it
     belongs_to :owner, polymorphic: true
-    has_rich_text :body
 
-    # This is polymorphic and optional
-    has_one :classified_submission, inverse_of: :classified
+    # When submitted through the wizard
+    belongs_to :classified_submission, polymorphic: true, optional: true
+
+    has_rich_text :body
 
     acts_as_statused(
       :draft,       # Initial state

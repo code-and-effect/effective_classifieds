@@ -1,0 +1,8 @@
+= render 'layout' do
+  = render 'effective/classified_submissions/content', resource: resource
+
+  = render('effective/classified_submissions/classified_submission', classified_submission: resource)
+
+  = effective_form_with(model: resource, url: wizard_path(step), method: :put) do |f|
+    = f.hidden_field :id
+    = f.submit 'Submit Classified', class: 'btn btn-primary'
