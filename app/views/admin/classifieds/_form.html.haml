@@ -1,0 +1,8 @@
+= tabs do
+  = tab 'Classified' do
+    = render 'admin/classifieds/form_classified', classified: classified
+
+  - if classified.persisted?
+    - if classified.respond_to?(:log_changes_datatable)
+      = tab 'Logs' do
+        = render_inline_datatable(classified.log_changes_datatable)

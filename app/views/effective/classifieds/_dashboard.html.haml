@@ -1,0 +1,10 @@
+%h2 Classifieds
+
+- if current_user.classifieds.present?
+  %p You are a representative for #{pluralize(current_user.classifieds.length, 'classified')}.
+
+  - datatable = EffectiveResources.best('EffectiveClassifiedsDatatable').new(self, namespace: :effective)
+  = render_datatable(datatable, simple: true)
+
+- else
+  %p You are not a representative. When you create an classified, or if someone else adds you to their classified, we'll show them here.

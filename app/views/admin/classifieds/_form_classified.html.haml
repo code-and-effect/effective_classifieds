@@ -1,0 +1,9 @@
+= effective_form_with(model: [:admin, classified], engine: true) do |f|
+  = render 'admin/classifieds/fields', f: f
+
+  = effective_submit(f)
+
+- if classified.persisted?
+  %h2 Representatives
+  - datatable = Admin::EffectiveRepresentativesDatatable.new(classified: classified)
+  = render_inline_datatable(datatable)

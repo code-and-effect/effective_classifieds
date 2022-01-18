@@ -1,0 +1,19 @@
+class CreateEffectiveClassifieds < ActiveRecord::Migration[6.0]
+  def change
+    # Classifieds
+    create_table :classifieds do |t|
+      t.string    :title
+
+      t.string    :category
+      t.text      :notes
+
+      t.integer :representatives_count, default: 0
+
+      t.datetime :updated_at
+      t.datetime :created_at
+    end
+
+    add_index :classifieds, :title
+
+  end
+end
