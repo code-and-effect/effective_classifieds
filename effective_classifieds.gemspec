@@ -10,8 +10,8 @@ Gem::Specification.new do |spec|
   spec.authors     = ['Code and Effect']
   spec.email       = ['info@codeandeffect.com']
   spec.homepage    = 'https://github.com/code-and-effect/effective_classifieds'
-  spec.summary     = 'Users have many classifieds through representatives.'
-  spec.description = 'Users have many classifieds through representatives.'
+  spec.summary     = 'Users submit classified ads for job openings and equipment sales'
+  spec.description = 'Users submit classified ads for job openings and equipment sales'
   spec.license     = 'MIT'
 
   spec.files = Dir["{app,config,db,lib}/**/*"] + ['MIT-LICENSE', 'Rakefile', 'README.md']

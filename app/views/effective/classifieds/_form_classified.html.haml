@@ -4,8 +4,3 @@
   = render 'effective/classifieds/fields', f: f
 
   = f.submit
-
-- if classified.persisted?
-  %h2 Representatives
-  - datatable = EffectiveRepresentativesDatatable.new(classified: classified)
-  = render_inline_datatable(datatable)

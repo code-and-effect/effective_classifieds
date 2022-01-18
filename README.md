@@ -1,6 +1,6 @@
 # Effective Classifieds
 
-Users have many classifieds through representatives.
+Users submit classified ads for job openings and equipment sales.
 
 ## Getting Started
 
@@ -60,9 +60,6 @@ Add a link to the admin menu:
 - if can? :admin, :effective_classifieds
   - if can? :index, Effective::Classified
     = nav_link_to 'Classifieds', effective_classifieds.admin_classifieds_path
-
-  - if can? :index, Effective::Representative
-    = nav_link_to 'Representatives', effective_classifieds.admin_representatives_path
 ```
 
 ## Configuration
@@ -78,41 +75,7 @@ This gem works with effective roles for the representative roles.
 Configure your `config/initializers/effective_roles.rb` something like this:
 
 ```
-EffectiveRoles.setup(:caaa) do |config|
-  config.roles = [:admin, :reserved, :owner, :billing] # Only add to the end of this array. Never prepend roles.
-
-  # config.role_descriptions
-  # ========================
-  # This setting configures the text that is displayed by form helpers (see README.md)
-
-  config.role_descriptions = {
-    'User' => {
-      # User roles
-      admin: 'can log in to the /admin section of the website. full access to everything.',
-    },
-    'Effective::Representative' => {
-      owner: 'the owner. full access to everything.',
-      billing: 'the billing contact. full access to everything.'
-    }
-  }
-
-  # config.assignable_roles
-  # Which roles can be assigned by whom
-  # =======================
-  # When current_user is passed into a form helper function (see README.md)
-  # this setting determines which roles that current_user may assign
-  config.assignable_roles = {
-    'User' => { admin: [:admin] },
-
-    'Effective::Representative' => {
-      admin: [:owner, :billing],
-      owner: [:owner, :billing],
-      billing: [:billing]
-    }
-  }
-end
 ```
-
 
 ## Permissions
 
@@ -120,36 +83,11 @@ The permissions you actually want to define are as follows (using CanCan):
 
 ```ruby
 if user.persisted?
-  can :index, EffectiveClassifieds.Classified
-  can(:show, EffectiveClassifieds.Classified) { |classified| user.classifieds.include?(classified) }
-
-  can([:edit, :update], EffectiveClassifieds.Classified) do |classified|
-    rep = user.representative(classified: classified)
-    rep && (rep.is?(:owner) || rep.is?(:billing))
-  end
-
-  can :index, Effective::Representative
-  can(:new, Effective::Representative)
-
-  can([:create, :edit, :update], Effective::Representative) do |representative|
-    rep = user.representative(classified: representative.classified)
-    rep && (rep.is?(:owner) || rep.is?(:billing))
-  end
-
-  can(:destroy, Effective::Representative) do |representative|
-    allowed = !(representative.is?(:owner) || representative.is?(:billing))
-    rep = user.representative(classified: representative.classified)
-
-    allowed && rep && (rep.is?(:owner) || rep.is?(:billing))
-  end
 end
 
 if user.admin?
   can :admin, :effective_classifieds
   can(crud, EffectiveClassifieds.Classified)
-
-  can(crud - [:destroy], Effective::Representative)
-  can(:destroy, Effective::Representative) { |rep| !rep.is?(:owner) }
 end
 ```
 

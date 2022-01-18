@@ -7,8 +7,6 @@ class CreateEffectiveClassifieds < ActiveRecord::Migration[6.0]
       t.string    :category
       t.text      :notes
 
-      t.integer :representatives_count, default: 0
-
       t.datetime :updated_at
       t.datetime :created_at
     end
