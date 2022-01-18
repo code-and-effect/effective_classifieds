@@ -34,8 +34,8 @@ module Effective
       phone              :string
 
       # Logic
-      start_at           :datetime
-      end_at             :datetime
+      start_on           :date
+      end_on             :date
 
       # Acts as Slugged
       slug               :string
@@ -54,13 +54,13 @@ module Effective
     scope :sorted, -> { order(:id) }
     scope :deep, -> { includes(:owner).with_rich_text_body }
 
-    scope :upcoming, -> { where(arel_table[:end_at].gt(Time.zone.now)) }
-    scope :past, -> { where(arel_table[:end_at].lteq(Time.zone.now)) }
+    scope :upcoming, -> { where(arel_table[:end_on].gt(Time.zone.now)) }
+    scope :past, -> { where(arel_table[:end_on].lteq(Time.zone.now)) }
 
     scope :published, -> {
       approved
-      .where(arel_table[:start_at].lteq(Time.zone.now))
-      .where(arel_table[:end_at].gt(Time.zone.now))
+      .where(arel_table[:start_on].lteq(Time.zone.now))
+      .where(arel_table[:end_on].gt(Time.zone.now))
     }
 
     scope :paginate, -> (page: nil, per_page: nil) {
@@ -99,8 +99,8 @@ module Effective
 
     validates :title, presence: true, length: { maximum: 200 }
     validates :category, presence: true
-    validates :start_at, presence: true
-    validates :end_at, presence: true
+    validates :start_on, presence: true
+    validates :end_on, presence: true
 
     validate(if: -> { category.present? }) do
       self.errors.add(:category, 'is invalid') unless Array(EffectiveClassifieds.categories).include?(category)
@@ -112,8 +112,8 @@ module Effective
 
     def published?
       return false unless approved?
-      return false if start_at.blank? || (Time.zone.now < start_at)
-      return false if end_at.present? && (Time.zone.now >= end_at)
+      return false if start_on.blank? || (Time.zone.now < start_on)
+      return false if end_on.present? && (Time.zone.now >= end_on)
       true
     end
 

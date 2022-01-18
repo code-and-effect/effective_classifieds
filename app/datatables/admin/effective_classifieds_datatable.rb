@@ -28,8 +28,8 @@ module Admin
       col :email
       col :phone
 
-      col :start_at
-      col :end_at
+      col :start_on
+      col :end_on
 
       col :status, search: ['submitted', 'approved']
 

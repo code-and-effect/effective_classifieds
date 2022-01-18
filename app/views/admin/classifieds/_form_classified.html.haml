@@ -6,8 +6,8 @@
     - current_url = (effective_classifieds.classified_url(f.object) rescue nil)
     = f.text_field :slug, hint: "The slug controls this resource's internet address. Be careful, changing the slug will break links that other websites may have to the old address.<br>#{('This is currently reachable via ' + link_to(current_url.gsub(f.object.slug, '<strong>' + f.object.slug + '</strong>').html_safe, current_url)) if current_url }".html_safe
 
-  = f.datetime_field :start_at, label: "Classified Start", hint: 'The classified ad will be displayed starting at this time'
-  = f.datetime_field :end_at, label: "Classified End", hint: 'The classified ad will no longer be displayed after this time'
+  = f.date_field :start_on, label: "Classified Start", hint: 'The classified ad will be displayed starting on this date'
+  = f.date_field :end_on, label: "Classified End", hint: 'The classified ad will no longer be displayed on this date'
 
   %h2 Classified Content
   = f.rich_text_area :body, hint: 'The main body of your classified'

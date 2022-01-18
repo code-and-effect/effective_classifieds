@@ -1,11 +1,14 @@
 # Dashboard Classifieds
 class EffectiveClassifiedsDatatable < Effective::Datatable
   datatable do
-    order :title
+    order :start_on
 
-    col :id, visible: false
+    col :start_on, as: :date, label: 'Starts'
+    col :end_on, as: :date, label: 'Ends'
 
     col :title
+    col :organization
+    col :location
 
     actions_col
   end
