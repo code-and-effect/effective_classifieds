@@ -1,0 +1,31 @@
+-# In progress submission
+- submission = EffectiveClassifieds.ClassifiedSubmission.in_progress.for(current_user).first
+- datatable = EffectiveResources.best('EffectiveClassifiedSubmissionsDatatable').new(self, namespace: :effective)
+
+- if submission.present?
+  %h2 In Progress Classified Submissions
+
+  %p
+    Your submission for
+    = link_to(submission.classified, effective_classifieds.classified_path(submission.classified))
+    is incomplete
+
+  %p
+    Please
+    = link_to("Continue submission for #{submission.classified}", effective_classifieds.classified_classified_submission_build_path(submission.classified, submission, submission.next_step), 'data-turbolinks' => false, class: 'btn btn-primary')
+    or you can
+    = link_to('Abandon submission', effective_classifieds.classified_classified_submission_path(submission.classified, submission), 'data-confirm': "Really delete #{submission}?", 'data-method': :delete, class: 'btn btn-danger')
+    to register for another classified.
+
+    %hr
+
+%h2 Classified Submissions
+
+- if datatable.present?
+  = render_simple_datatable(datatable)
+- else
+  %p You have no past classified submissions. When you do, we'll show them here.
+
+-# TODO enable an all classifieds page
+- if false # if submission.blank?
+  %p= link_to 'View all Classifieds', effective_classifieds.classifieds_path, class: 'btn btn-primary'

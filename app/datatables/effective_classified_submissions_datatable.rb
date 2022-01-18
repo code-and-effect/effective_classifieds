@@ -28,7 +28,7 @@ class EffectiveClassifiedSubmissionsDatatable < Effective::Datatable
   end
 
   collection do
-    EffectiveEvents.ClassifiedSubmission.deep.where(owner: current_user)
+    EffectiveClassifieds.ClassifiedSubmission.deep.where(owner: current_user)
   end
 
 end

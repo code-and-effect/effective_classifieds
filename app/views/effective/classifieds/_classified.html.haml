@@ -1,0 +1,43 @@
+= card(classified.title, class: 'effective-classified') do
+  %table.table.effective-classified-table
+    %tbody
+      %tr
+        %td Available
+        %td #{classified.start_at&.strftime('%F')} to #{classified.end_at&.strftime('%F')}.
+
+      %tr
+        %td Contact
+        %td= classified.organization
+
+      %tr
+        %td Location
+        %td= classified.location.presence || '-'
+
+      %tr
+        %td Website
+        %td
+          - if classified.website.present?
+            = link_to(classified.website, classified.website, target: '_blank')
+          - else
+            = '-'
+
+      %tr
+        %td Email
+        %td
+          - if classified.email.present?
+            = mail_to(classified.email)
+          - else
+            = '-'
+
+      %tr
+        %td Phone
+        %td
+          - if classified.phone.present?
+            = classified.phone
+          - else
+            = '-'
+
+  - if block_given?
+    = yield
+  - else
+    %p= link_to('View Classified', effective_classifieds.classified_path(classified), class: 'btn btn-primary')

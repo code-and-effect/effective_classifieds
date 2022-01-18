@@ -7,7 +7,7 @@ end
 EffectiveClassifieds::Engine.routes.draw do
   # Public routes
   scope module: 'effective' do
-    resources :classifieds, except: [:show, :destroy]
+    resources :classifieds, only: [:show, :index]
   end
 
   namespace :admin do

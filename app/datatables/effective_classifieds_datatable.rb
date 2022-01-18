@@ -11,7 +11,7 @@ class EffectiveClassifiedsDatatable < Effective::Datatable
   end
 
   collection do
-    EffectiveClassifieds.Classified.classifieds(user: current_user)
+    Effective::Classified.classifieds(user: current_user)
   end
 
 end

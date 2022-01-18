@@ -1,0 +1,8 @@
+%h1= @page_title
+
+= render 'layout' do
+  .effective-classifieds
+    = render partial: @classifieds, spacer_template: 'spacer'
+
+  %nav.d-flex.justify-content-center
+    = bootstrap_paginate(@classifieds, per_page: EffectiveClassifieds.per_page)

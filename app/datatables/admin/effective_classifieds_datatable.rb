@@ -1,5 +1,11 @@
 module Admin
   class EffectiveClassifiedsDatatable < Effective::Datatable
+    filters do
+      scope :all
+      scope :submitted
+      scope :published
+    end
+
     datatable do
 
       col :updated_at, visible: false

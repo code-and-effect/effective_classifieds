@@ -1,10 +1,8 @@
 %h2 Classifieds
 
-- if current_user.classifieds.present?
-  %p You are a representative for #{pluralize(current_user.classifieds.length, 'classified')}.
+- published = Effective::Classified.classifieds(user: current_user).count
 
-  - datatable = EffectiveResources.best('EffectiveClassifiedsDatatable').new(self, namespace: :effective)
-  = render_datatable(datatable, simple: true)
+- datatable = EffectiveClassifiedsDatatable.new(self, namespace: :effective)
+= render_datatable(datatable, simple: true)
 
-- else
-  %p You are not a representative. When you create an classified, or if someone else adds you to their classified, we'll show them here.
+%p= link_to 'View All Classifieds', effective_classifieds.classifieds_path, class: 'btn btn-primary'

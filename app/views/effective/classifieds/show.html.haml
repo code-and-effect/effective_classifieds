@@ -1,0 +1,8 @@
+= render 'layout' do
+  .effective-classified
+    - unless @classified.published?
+      .alert.alert-warning This classified is currently unavailable.
+
+    = render 'effective/classifieds/classified', classified: @classified do
+      .classified-body.classified-content
+        = @classified.body

@@ -1,6 +1,0 @@
-- url = (classified.persisted? ? effective_classifieds.classified_path(classified) : effective_classifieds.classifieds_path)
-
-= effective_form_with(model: classified, url: url) do |f|
-  = render 'effective/classifieds/fields', f: f
-
-  = f.submit
