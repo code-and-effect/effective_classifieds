@@ -1,9 +1,22 @@
 = effective_form_with(model: [:admin, classified], engine: true) do |f|
-  = render 'admin/classifieds/fields', f: f
+  = f.text_field :title
+  = f.select :category, EffectiveClassifieds.categories, required: true
+
+  - if f.object.persisted? || f.object.errors.include?(:slug)
+    - current_url = (effective_classifieds.classified_url(f.object) rescue nil)
+    = f.text_field :slug, hint: "The slug controls this resource's internet address. Be careful, changing the slug will break links that other websites may have to the old address.<br>#{('This is currently reachable via ' + link_to(current_url.gsub(f.object.slug, '<strong>' + f.object.slug + '</strong>').html_safe, current_url)) if current_url }".html_safe
+
+  = f.datetime_field :start_at, label: "Classified Start", hint: 'The classified ad will be displayed starting at this time'
+  = f.datetime_field :end_at, label: "Classified End", hint: 'The classified ad will no longer be displayed after this time'
+
+  %h2 Classified Content
+  = f.rich_text_area :body, hint: 'The main body of your classified'
+  = f.text_field :location
+  = f.url_field :website
+
+  %h2 Contact Information
+  = f.text_field :organization
+  = f.email_field :email
+  = f.tel_field :phone
 
   = effective_submit(f)
-
-- if classified.persisted?
-  %h2 Representatives
-  - datatable = Admin::EffectiveRepresentativesDatatable.new(classified: classified)
-  = render_inline_datatable(datatable)

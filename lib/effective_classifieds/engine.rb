@@ -10,7 +10,7 @@ module EffectiveClassifieds
     # Include acts_as_addressable concern and allow any ActiveRecord object to call it
     initializer 'effective_classifieds.active_record' do |app|
       ActiveSupport.on_load :active_record do
-        ActiveRecord::Base.extend(EffectiveClassifiedsUser::Base)
+        ActiveRecord::Base.extend(EffectiveClassifiedsClassifiedSubmission::Base)
       end
     end
 

@@ -1,6 +1,6 @@
 # Effective Classifieds
 
-Users submit classified ads for job openings and equipment sales.
+Submit classified ads for job openings and equipment sales.
 
 ## Getting Started
 

@@ -12,19 +12,32 @@ module Admin
       end
 
       col :title
+      col :body
+      col :slug, visible: false
 
-      col :representatives_count
-      col :representatives
+      col :organization
+      col :location
 
-      actions_col
+      col :website
+      col :email
+      col :phone
+
+      col :start_at
+      col :end_at
+
+      col :status, search: ['submitted', 'approved']
+
+      actions_col do |classified|
+        dropdown_link_to('View Classified', effective_classifieds.classified_path(classified), target: '_blank')
+      end
     end
 
     collection do
-      EffectiveClassifieds.Classified.deep.all
+      Effective::Classified.all.where.not(status: :draft)
     end
 
     def categories
-      EffectiveClassifieds.Classified.categories
+      EffectiveClassifieds.categories
     end
 
   end

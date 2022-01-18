@@ -6,13 +6,12 @@ class EffectiveClassifiedsDatatable < Effective::Datatable
     col :id, visible: false
 
     col :title
-    col :representatives
 
     actions_col
   end
 
   collection do
-    EffectiveClassifieds.Classified.deep.where(id: current_user.classifieds)
+    EffectiveClassifieds.Classified.classifieds(user: current_user)
   end
 
 end

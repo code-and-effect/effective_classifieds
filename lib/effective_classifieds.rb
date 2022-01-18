@@ -7,15 +7,16 @@ module EffectiveClassifieds
 
   def self.config_keys
     [
-      :classifieds_table_name,
-      :layout, :classified_class_name
+      :classifieds_table_name, :classified_submissions_table_name,
+      :layout, :categories, :per_page, :use_effective_roles,
+      :classified_submission_class_name
     ]
   end
 
   include EffectiveGem
 
-  def self.Classified
-    classified_class_name&.constantize || Effective::Classified
+  def self.ClassifiedSubmission
+    classified_submission_class_name&.constantize || Effective::ClassifiedSubmission
   end
 
 end

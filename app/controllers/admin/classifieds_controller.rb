@@ -5,6 +5,10 @@ module Admin
 
     include Effective::CrudController
 
+    submit :save, 'Save'
+    submit :save, 'Save and View', redirect: -> { effective_classifieds.classified_path(resource) }
+    submit :approve, 'Approve'
+
     private
 
     def permitted_params

@@ -1,8 +1,129 @@
+# frozen_string_literal: true
+
 module Effective
   class Classified < ActiveRecord::Base
     self.table_name = EffectiveClassifieds.classifieds_table_name.to_s
 
-    effective_classifieds_classified
+    attr_accessor :current_user
+
+    acts_as_slugged
+    log_changes if respond_to?(:log_changes)
+    acts_as_role_restricted if respond_to?(:acts_as_role_restricted)
+
+    belongs_to :owner, polymorphic: true
+    has_rich_text :body
+
+    # This is polymorphic and optional
+    has_one :classified_submission, inverse_of: :classified
+
+    acts_as_statused(
+      :draft,       # Initial state
+      :submitted,   # Once submitted by the classified submission.
+      :approved     # Exit state. Classified was approved.
+    )
+
+    effective_resource do
+      title              :string
+      category           :string
+
+      organization       :string    # Or seller
+      location           :string
+
+      website            :string
+      email              :string
+      phone              :string
+
+      # Logic
+      start_at           :datetime
+      end_at             :datetime
+
+      # Acts as Slugged
+      slug               :string
+
+      # Acts as Statused
+      status                 :string, permitted: false
+      status_steps           :text, permitted: false
+
+      # Access
+      roles_mask         :integer
+      authenticate_user  :boolean
+
+      timestamps
+    end
+
+    scope :sorted, -> { order(:id) }
+    scope :deep, -> { includes(:owner).with_rich_text_body }
+
+    scope :upcoming, -> { where(arel_table[:end_at].gt(Time.zone.now)) }
+    scope :past, -> { where(arel_table[:end_at].lteq(Time.zone.now)) }
+
+    scope :published, -> {
+      approved
+      .where(arel_table[:start_at].lteq(Time.zone.now))
+      .where(arel_table[:end_at].gt(Time.zone.now))
+    }
+
+    scope :paginate, -> (page: nil, per_page: nil) {
+      page = (page || 1).to_i
+      offset = [(page - 1), 0].max * (per_page || EffectiveClassifieds.per_page)
+
+      limit(per_page).offset(offset)
+    }
+
+    scope :classifieds, -> (user: nil, unpublished: false) {
+      scope = all.deep.sorted
+
+      if defined?(EffectiveRoles) && EffectiveClassifieds.use_effective_roles
+        scope = scope.for_role(user&.roles)
+      end
+
+      if user.blank?
+        scope = scope.where(authenticate_user: false)
+      end
+
+      unless unpublished
+        scope = scope.published
+      end
+
+      scope
+    }
+
+    before_validation(if: -> { current_user.present? }) do
+      self.owner ||= current_user
+    end
+
+    # Automatically approve submissions created by admins outside the submissions wizard
+    before_validation(if: -> { new_record? && classified_submission.blank? && current_user.present? }) do
+      assign_attributes(status: :approved)
+    end
+
+    validates :title, presence: true, length: { maximum: 200 }
+    validates :category, presence: true
+    validates :start_at, presence: true
+    validates :end_at, presence: true
+
+    validate(if: -> { category.present? }) do
+      self.errors.add(:category, 'is invalid') unless Array(EffectiveClassifieds.categories).include?(category)
+    end
+
+    def to_s
+      title.presence || 'New Classified'
+    end
+
+    def published?
+      return false unless approved?
+      return false if start_at.blank? || (Time.zone.now < start_at)
+      return false if end_at.present? && (Time.zone.now >= end_at)
+      true
+    end
+
+    def submit!
+      submitted!
+    end
+
+    def approve!
+      approved!
+    end
 
   end
 end
