@@ -9,14 +9,14 @@ class Admin::EffectiveClassifiedSubmissionsDatatable < Effective::Datatable
 
     col :submitted_at, label: 'Submitted', visible: false, as: :date
 
-    col :classifieds, search: :string
+    col :classified, search: :string
     col :owner
 
     actions_col
   end
 
   collection do
-    EffectiveSubmissions.ClassifiedSubmission.all.deep.done
+    EffectiveSubmissions.ClassifiedSubmission.all.deep.done.joins(:classified)
   end
 
 end

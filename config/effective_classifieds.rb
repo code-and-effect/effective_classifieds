@@ -18,4 +18,7 @@ EffectiveClassifieds.setup do |config|
   # Classified can be restricted by role
   config.use_effective_roles = true
 
+  # Automatically end classifieds after this duration
+  config.max_duration = 3.months
+
 end

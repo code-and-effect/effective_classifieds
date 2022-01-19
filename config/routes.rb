@@ -7,7 +7,7 @@ end
 EffectiveClassifieds::Engine.routes.draw do
   # Public routes
   scope module: 'effective' do
-    resources :classifieds, only: [:show, :index]
+    resources :classifieds, except: [:new, :create]
 
     resources :classified_submissions, only: [:new, :show, :destroy] do
       resources :build, controller: :classified_submissions, only: [:show, :update]
@@ -16,7 +16,9 @@ EffectiveClassifieds::Engine.routes.draw do
   end
 
   namespace :admin do
-    resources :classifieds, except: [:show]
+    resources :classifieds, except: [:show] do
+      post :approve, on: :member
+    end
   end
 
 end

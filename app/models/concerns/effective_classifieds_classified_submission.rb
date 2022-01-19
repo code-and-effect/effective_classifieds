@@ -47,8 +47,8 @@ module EffectiveClassifiedsClassifiedSubmission
     accepts_nested_attributes_for :owner
 
     # Effective Namespace
-    has_many :classifieds, -> { order(:id) }, class_name: 'Effective::Classified', inverse_of: :classified_submission, dependent: :destroy
-    accepts_nested_attributes_for :classifieds, reject_if: :all_blank, allow_destroy: true
+    has_one :classified, class_name: 'Effective::Classified', inverse_of: :classified_submission, dependent: :destroy
+    accepts_nested_attributes_for :classified, reject_if: :all_blank, allow_destroy: true
 
     effective_resource do
       # Acts as Statused
@@ -64,7 +64,7 @@ module EffectiveClassifiedsClassifiedSubmission
       timestamps
     end
 
-    scope :deep, -> { includes(:owner, :classifieds) }
+    scope :deep, -> { includes(:classified) }
     scope :sorted, -> { order(:id) }
 
     scope :in_progress, -> { where.not(status: [:submitted]) }
@@ -77,9 +77,8 @@ module EffectiveClassifiedsClassifiedSubmission
 
     # Classified Step
     with_options(if: -> { current_step == :classified }) do
-      validates :classifieds, presence: true
+      validates :classified, presence: true
     end
-
   end
 
   # Instance Methods
@@ -95,11 +94,6 @@ module EffectiveClassifiedsClassifiedSubmission
     submitted?
   end
 
-  def build_classified
-    classified = classifieds.first
-    classified || classifieds.build(owner: owner)
-  end
-
   # Called on the Review / Summary Step
   # But we actually want to submit it
   def summary!
@@ -107,7 +101,11 @@ module EffectiveClassifiedsClassifiedSubmission
   end
 
   def submit!
-    classifieds.select(&:draft?).each(&:submitted!)
+    raise('already submitted') if was_submitted?
+
+    wizard_steps[:submitted] = Time.zone.now
+
+    classified.submitted! unless classified.was_submitted?
     submitted!
   end
 

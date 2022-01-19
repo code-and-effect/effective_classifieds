@@ -10,10 +10,13 @@ class EffectiveClassifiedSubmissionsDatatable < Effective::Datatable
       submission.submitted_at&.strftime('%F') || 'Incomplete'
     end
 
-    col :classifieds, search: :string, label: 'Classified'
+    col :classified, search: :string
 
     col :owner, visible: false, search: :string
-    col :status, visible: false
+
+    col :status do |submission|
+      submission.classified&.status || submission.status
+    end
 
     actions_col(actions: []) do |submission|
       if submission.draft?
@@ -22,11 +25,16 @@ class EffectiveClassifiedSubmissionsDatatable < Effective::Datatable
       else
         dropdown_link_to('Show', effective_classifieds.classified_submission_path(submission))
       end
+
+      if submission.was_submitted? && (classified = submission.classified).present?
+        dropdown_link_to('Edit Classified', effective_classifieds.edit_classified_path(classified))
+        dropdown_link_to('Delete Classified', effective_classifieds.classified_path(classified), 'data-confirm': "Really delete #{classified}?", 'data-method': :delete)
+      end
     end
   end
 
   collection do
-    EffectiveClassifieds.ClassifiedSubmission.deep.where(owner: current_user)
+    EffectiveClassifieds.ClassifiedSubmission.deep.where(owner: current_user).left_joins(:classified)
   end
 
 end

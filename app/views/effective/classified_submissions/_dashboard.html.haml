@@ -6,16 +6,14 @@
   %h2 In Progress Classified Submissions
 
   %p
-    Your submission for
-    = link_to(submission.classified, effective_classifieds.classified_path(submission.classified))
-    is incomplete
+    Your submission for #{submission.classified.presence || 'a classified'} is incomplete
 
   %p
     Please
-    = link_to("Continue submission for #{submission.classified}", effective_classifieds.classified_submission_build_path(submission, submission.next_step), 'data-turbolinks' => false, class: 'btn btn-primary')
+    = link_to("Continue submission for #{submission.classified.presence || 'a classified'}", effective_classifieds.classified_submission_build_path(submission, submission.next_step), 'data-turbolinks' => false, class: 'btn btn-primary')
     or you can
     = link_to('Abandon submission', effective_classifieds.classified_submission_path(submission), 'data-confirm': "Really delete #{submission}?", 'data-method': :delete, class: 'btn btn-danger')
-    to register for another classified.
+    to submit another.
 
   %hr
 

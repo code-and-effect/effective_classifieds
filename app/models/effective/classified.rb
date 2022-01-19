@@ -55,7 +55,7 @@ module Effective
     end
 
     scope :sorted, -> { order(:id) }
-    scope :deep, -> { includes(:owner).with_rich_text_body }
+    scope :deep, -> { with_rich_text_body }
 
     scope :upcoming, -> { where(arel_table[:end_on].gt(Time.zone.now)) }
     scope :past, -> { where(arel_table[:end_on].lteq(Time.zone.now)) }
@@ -104,6 +104,17 @@ module Effective
     validates :category, presence: true
     validates :start_on, presence: true
     validates :end_on, presence: true
+
+    validate(if: -> { start_on.present? && end_on.present? }) do
+      self.errors.add(:end_on, 'must be after start date') if end_on < start_on
+    end
+
+    validate(if: -> { start_on.present? && end_on.present? && EffectiveClassifieds.max_duration.present? }) do
+      if (end_on - start_on) > EffectiveClassifieds.max_duration
+        distance = ApplicationController.helpers.distance_of_time_in_words(end_on + EffectiveClassifieds.max_duration, end_on).gsub('about', '').strip
+        self.errors.add(:end_on, "must be within #{distance} of start date")
+      end
+    end
 
     validate(if: -> { category.present? }) do
       self.errors.add(:category, 'is invalid') unless Array(EffectiveClassifieds.categories).include?(category)
