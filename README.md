@@ -39,21 +39,18 @@ Then migrate the database:
 rake db:migrate
 ```
 
-Please add the following to your User model:
-
-```
-effective_classifieds_user
-
-Use the following datatables to display to your user their applicants dues:
+Please add the following to your user dashboard page:
 
 ```haml
-%h2 My Classifieds
-- datatable = EffectiveClassifiedsDatatable.new(self)
+.card.card-dashboard.mb-4
+  .card-body= render 'effective/classifieds/dashboard'
+
+.card.card-dashboard.mb-4
+  .card-body= render 'effective/classified_submissions/dashboard'
 ```
 
 and
 
-```
 Add a link to the admin menu:
 
 ```haml
