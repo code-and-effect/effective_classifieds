@@ -82,12 +82,21 @@ Configure your `config/initializers/effective_roles.rb` something like this:
 The permissions you actually want to define are as follows (using CanCan):
 
 ```ruby
-if user.persisted?
-end
+can([:index, :show], Effective::Classified) { |classified| classified.published? }
+can([:show, :edit, :update], Effective::Classified) { |classified| classified.owner == user }
+
+can([:show, :index, :destroy], EffectiveClassifieds.ClassifiedSubmission) { |submission| submission.owner == user }
+can([:update], EffectiveClassifieds.ClassifiedSubmission) { |submission| submission.owner == user && !submission.was_submitted? }
 
 if user.admin?
   can :admin, :effective_classifieds
-  can(crud, EffectiveClassifieds.Classified)
+
+  can(crud - [:destroy], Classified)
+
+  can(:approve, Classified) { |classified| classified.was_submitted? && !classified.approved? }
+  can(:destroy, Classified) { |classified| !classified.draft? }
+
+  can([:new, :index, :show], EffectiveClassifieds.ClassifiedSubmission)
 end
 ```
 
