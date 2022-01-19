@@ -21,4 +21,6 @@ EffectiveClassifieds.setup do |config|
   # Automatically end classifieds after this duration
   config.max_duration = 3.months
 
+  # Automatically approve classified submissions, otherwise require admin approval
+  config.auto_approve = true
 end

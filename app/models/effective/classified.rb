@@ -51,6 +51,8 @@ module Effective
       roles_mask         :integer
       authenticate_user  :boolean
 
+      archived           :boolean
+
       timestamps
     end
 
@@ -106,8 +108,15 @@ module Effective
 
     validates :title, presence: true, length: { maximum: 200 }
     validates :category, presence: true
+    validates :body, presence: true
+
     validates :start_on, presence: true
     validates :end_on, presence: true
+    validates :location, presence: true
+
+    validates :organization, presence: true
+    validates :email, presence: true
+    validates :phone, presence: true
 
     validate(if: -> { start_on.present? && end_on.present? }) do
       self.errors.add(:end_on, 'must be after start date') if end_on < start_on
@@ -138,10 +147,8 @@ module Effective
 
     def submit!
       submitted!
-    end
-
-    def approve!
-      approved!
+      approved! if EffectiveClassifieds.auto_approve
+      true
     end
 
   end

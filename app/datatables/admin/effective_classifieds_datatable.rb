@@ -2,7 +2,12 @@ module Admin
   class EffectiveClassifiedsDatatable < Effective::Datatable
     filters do
       scope :all
-      scope :submitted
+
+      unless EffectiveClassifieds.auto_approve
+        scope :submitted
+        scope :approved
+      end
+
       scope :published
     end
 
@@ -35,7 +40,9 @@ module Admin
 
       col :archived
 
-      col :status, search: ['submitted', 'approved']
+      unless EffectiveClassifieds.auto_approve
+        col :status, search: ['submitted', 'approved']
+      end
 
       actions_col do |classified|
         dropdown_link_to('View Classified', effective_classifieds.classified_path(classified), target: '_blank')

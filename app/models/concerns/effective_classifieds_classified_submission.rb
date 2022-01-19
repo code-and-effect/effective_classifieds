@@ -103,9 +103,9 @@ module EffectiveClassifiedsClassifiedSubmission
   def submit!
     raise('already submitted') if was_submitted?
 
-    wizard_steps[:submitted] = Time.zone.now
+    classified.submit! unless classified.was_submitted?
 
-    classified.submitted! unless classified.was_submitted?
+    wizard_steps[:submitted] = Time.zone.now
     submitted!
   end
 

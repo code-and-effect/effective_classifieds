@@ -8,7 +8,7 @@ module EffectiveClassifieds
   def self.config_keys
     [
       :classifieds_table_name, :classified_submissions_table_name,
-      :layout, :categories, :per_page, :use_effective_roles, :max_duration,
+      :layout, :categories, :per_page, :use_effective_roles, :max_duration, :auto_approve,
       :classified_submission_class_name
     ]
   end

@@ -43,5 +43,11 @@ module Effective
       @page_title ||= @classified.to_s
     end
 
+    private
+
+    def permitted_params
+      params.require(:effective_classified).permit!.except(:status, :status_steps)
+    end
+
   end
 end
