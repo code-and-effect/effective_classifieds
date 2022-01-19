@@ -5,12 +5,18 @@ class EffectiveClassifiedsDatatable < Effective::Datatable
 
     col :start_on, as: :date, label: 'Starts'
     col :end_on, as: :date, label: 'Ends'
+    col :archived
 
     col :title
+    col :body
     col :organization
     col :location
 
-    actions_col
+    col :website, visible: false
+    col :email, visible: false
+    col :phone, visible: false
+
+    actions_col(edit: false)
   end
 
   collection do

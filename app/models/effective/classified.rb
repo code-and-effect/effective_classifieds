@@ -60,8 +60,12 @@ module Effective
     scope :upcoming, -> { where(arel_table[:end_on].gt(Time.zone.now)) }
     scope :past, -> { where(arel_table[:end_on].lteq(Time.zone.now)) }
 
+    scope :unarchived, -> { where(archived: false) }
+    scope :archived, -> { where(archived: true) }
+
     scope :published, -> {
       approved
+      .unarchived
       .where(arel_table[:start_on].lteq(Time.zone.now))
       .where(arel_table[:end_on].gt(Time.zone.now))
     }
@@ -126,6 +130,7 @@ module Effective
 
     def published?
       return false unless approved?
+      return false if archived?
       return false if start_on.blank? || (Time.zone.now < start_on)
       return false if end_on.present? && (Time.zone.now >= end_on)
       true

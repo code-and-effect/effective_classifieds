@@ -15,6 +15,9 @@ module Admin
 
       col :classified_submission, visible: false, search: :string
 
+      col :start_on, as: :date
+      col :end_on, as: :date
+
       if categories.present?
         col :category, search: categories
       end
@@ -30,8 +33,7 @@ module Admin
       col :email
       col :phone
 
-      col :start_on
-      col :end_on
+      col :archived
 
       col :status, search: ['submitted', 'approved']
 

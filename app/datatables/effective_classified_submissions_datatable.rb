@@ -21,15 +21,12 @@ class EffectiveClassifiedSubmissionsDatatable < Effective::Datatable
     actions_col(actions: []) do |submission|
       if submission.draft?
         dropdown_link_to('Continue', effective_classifieds.classified_submission_build_path(submission, submission.next_step), 'data-turbolinks' => false)
-        dropdown_link_to('Delete', effective_classifieds.classified_submission_path(submission), 'data-confirm': "Really delete #{submission}?", 'data-method': :delete)
       else
         dropdown_link_to('Show', effective_classifieds.classified_submission_path(submission))
+        dropdown_link_to('Edit', effective_classifieds.edit_classified_path(submission.classified)) if submission.classified
       end
 
-      if submission.was_submitted? && (classified = submission.classified).present?
-        dropdown_link_to('Edit Classified', effective_classifieds.edit_classified_path(classified))
-        dropdown_link_to('Delete Classified', effective_classifieds.classified_path(classified), 'data-confirm': "Really delete #{classified}?", 'data-method': :delete)
-      end
+      dropdown_link_to('Delete', effective_classifieds.classified_submission_path(submission), 'data-confirm': "Really delete #{submission}?", 'data-method': :delete)
     end
   end
 

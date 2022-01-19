@@ -7,7 +7,7 @@ end
 EffectiveClassifieds::Engine.routes.draw do
   # Public routes
   scope module: 'effective' do
-    resources :classifieds, except: [:new, :create]
+    resources :classifieds, only: [:index, :show, :edit, :update]
 
     resources :classified_submissions, only: [:new, :show, :destroy] do
       resources :build, controller: :classified_submissions, only: [:show, :update]
