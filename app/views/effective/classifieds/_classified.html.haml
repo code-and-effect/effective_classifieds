@@ -1,43 +1,50 @@
-= card(classified.title, class: 'effective-classified') do
-  %table.table.effective-classified-table
-    %tbody
-      %tr
-        %td Available
-        %td #{classified.start_on&.strftime('%F')} to #{classified.end_on&.strftime('%F')}
+.card.effective-classified
+  .card-body
+    %h5.card-title= classified.title
 
-      %tr
-        %td Contact
-        %td= classified.organization
+    %table.table.effective-classified-table
+      %tbody
+        %tr
+          %td Category
+          %td= classified.category
 
-      %tr
-        %td Location
-        %td= classified.location.presence || '-'
+        %tr
+          %td Available
+          %td #{classified.start_on&.strftime('%F')} to #{classified.end_on&.strftime('%F')}
 
-      %tr
-        %td Website
-        %td
-          - if classified.website.present?
-            = link_to(classified.website, classified.website, target: '_blank')
-          - else
-            = '-'
+        %tr
+          %td Location
+          %td= classified.location.presence || '-'
 
-      %tr
-        %td Email
-        %td
-          - if classified.email.present?
-            = mail_to(classified.email)
-          - else
-            = '-'
+        %tr
+          %td Website
+          %td
+            - if classified.website.present?
+              = link_to(classified.website, classified.website, target: '_blank')
+            - else
+              = '-'
 
-      %tr
-        %td Phone
-        %td
-          - if classified.phone.present?
-            = classified.phone
-          - else
-            = '-'
+        %tr
+          %td Contact
+          %td= classified.organization
 
-  - if block_given?
-    = yield
-  - else
-    %p= link_to('View Classified', effective_classifieds.classified_path(classified), class: 'btn btn-primary')
+        %tr
+          %td Email
+          %td
+            - if classified.email.present?
+              = mail_to(classified.email)
+            - else
+              = '-'
+
+        %tr
+          %td Phone
+          %td
+            - if classified.phone.present?
+              = classified.phone
+            - else
+              = '-'
+
+    - if block_given?
+      = yield
+    - else
+      %p= link_to('View Classified', effective_classifieds.classified_path(classified), class: 'btn btn-primary')

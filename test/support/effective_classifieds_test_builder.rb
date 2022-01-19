@@ -17,5 +17,30 @@ module EffectiveClassifiedsTestBuilder
     )
   end
 
+  def build_classified(owner: nil)
+    owner ||= build_user()
+
+    Effective::Classified.new(
+      owner: owner,
+      title: 'A Classified Ad',
+      body: '<p>A cool job</p>',
+      category: EffectiveClassifieds.categories.first,
+      organization: 'Adams Restaurant',
+      location: 'California',
+      email: 'someone@example.com',
+      phone: '(444) 444-4444',
+      start_on: Time.zone.now,
+      end_on: (Time.zone.now + 7.days)
+    )
+  end
+
+  def build_classified_submission(classified: nil)
+    classified ||= build_classified()
+
+    Effective::ClassifiedSubmission.new(
+      classified: classified,
+      owner: classified.owner
+    )
+  end
 
 end

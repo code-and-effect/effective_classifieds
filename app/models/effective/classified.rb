@@ -102,7 +102,7 @@ module Effective
     end
 
     # Automatically approve submissions created by admins outside the submissions wizard
-    before_validation(if: -> { new_record? && classified_submission.blank? && current_user.present? }) do
+    before_validation(if: -> { new_record? && classified_submission.blank? }) do
       assign_attributes(status: :approved)
     end
 
@@ -147,8 +147,17 @@ module Effective
 
     def submit!
       submitted!
-      approved! if EffectiveClassifieds.auto_approve
+      approve! if EffectiveClassifieds.auto_approve
+
+      after_commit do
+        EffectiveClassifieds.send_email(:classified_submitted, self)
+      end
+
       true
+    end
+
+    def approve!
+      approved!
     end
 
   end

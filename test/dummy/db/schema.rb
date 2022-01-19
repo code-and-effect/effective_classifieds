@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 3) do
+ActiveRecord::Schema.define(version: 4) do
 
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
@@ -48,6 +48,49 @@ ActiveRecord::Schema.define(version: 3) do
     t.integer "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "classified_submissions", force: :cascade do |t|
+    t.string "token"
+    t.integer "owner_id"
+    t.string "owner_type"
+    t.string "status"
+    t.text "status_steps"
+    t.text "wizard_steps"
+    t.datetime "submitted_at"
+    t.datetime "updated_at"
+    t.datetime "created_at"
+    t.index ["owner_id", "owner_type"], name: "index_classified_submissions_on_owner_id_and_owner_type"
+    t.index ["status"], name: "index_classified_submissions_on_status"
+    t.index ["token"], name: "index_classified_submissions_on_token"
+  end
+
+  create_table "classifieds", force: :cascade do |t|
+    t.integer "classified_submission_id"
+    t.string "classified_submission_type"
+    t.integer "owner_id"
+    t.string "owner_type"
+    t.string "title"
+    t.string "category"
+    t.string "organization"
+    t.string "location"
+    t.string "website"
+    t.string "email"
+    t.string "phone"
+    t.datetime "start_on"
+    t.datetime "end_on"
+    t.string "slug"
+    t.string "status"
+    t.text "status_steps"
+    t.integer "roles_mask"
+    t.boolean "authenticate_user", default: false
+    t.boolean "archived", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["end_on"], name: "index_classifieds_on_end_on"
+    t.index ["owner_id", "owner_type"], name: "index_classifieds_on_owner_id_and_owner_type"
+    t.index ["slug"], name: "index_classifieds_on_slug"
+    t.index ["start_on"], name: "index_classifieds_on_start_on"
   end
 
   create_table "users", force: :cascade do |t|
