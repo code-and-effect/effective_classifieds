@@ -19,6 +19,7 @@ module Admin
       col :id, visible: false
 
       col :classified_submission, visible: false, search: :string
+      col :owner, visible: false, label: 'Submitted by'
 
       col :start_on, as: :date
       col :end_on, as: :date

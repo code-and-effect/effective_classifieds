@@ -2,13 +2,8 @@ module Effective
   class ClassifiedsController < ApplicationController
     include Effective::CrudController
 
-    resource_scope -> {
-      unpublished = EffectiveResources.authorized?(self, :admin, :effective_classifieds)
-      Effective::Classified.classifieds(user: current_user, unpublished: unpublished)
-    }
-
     def index
-      @classifieds ||= resource_scope.published
+      @classifieds ||= Effective::Classified.classifieds(user: current_user)
 
       @classifieds = @classifieds.paginate(page: params[:page])
 
