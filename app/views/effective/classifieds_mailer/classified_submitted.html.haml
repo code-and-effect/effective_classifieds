@@ -3,13 +3,18 @@
 - if @classified.published?
   %p The following classified ad has been submitted and is published online:
 - else
-  %p The following classified has been submitted and is awaiting your approval:
+  %p The following classified ad has been submitted and is awaiting your approval:
   %p= link_to('Approve Classified Ad', effective_classifieds.edit_admin_classified_path(@classified))
+
+%hr
 
 = render('effective/classifieds/classified', classified: @classified) do
   %p= @classified.body
 
 %hr
+
+- if !@classified.published?
+  %p= link_to('Approve Classified Ad', effective_classifieds.edit_admin_classified_path(@classified))
 
 %p= link_to('View Classified Ad', effective_classifieds.classified_path(@classified))
 
