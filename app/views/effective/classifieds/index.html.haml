@@ -2,7 +2,7 @@
   = link_to 'Submit New Classified Ad', effective_classifieds.new_classified_submission_path, class: 'btn btn-primary'
 
 = card do
-  - if @datatable
+  - if @datatable.present?(self)
     = render_datatable(@datatable, simple: true)
   - else
     %p There are no active classified ads. When there are, we'll show them here.
