@@ -3,7 +3,7 @@ EffectiveClassifieds.setup do |config|
   config.classified_submissions_table_name = :classified_submissions
 
   # Every classified must have a category.
-  config.categories = ['Job Board', 'Equipment Sales']
+  config.categories = ['Job', 'Equipment Sales', 'Other']
 
   # Layout Settings
   # Configure the Layout per controller, or all at once
@@ -13,7 +13,7 @@ EffectiveClassifieds.setup do |config|
   # config.classified_submission_class_name = 'Effective::ClassifiedSubmission'
 
   # Pagination length on the Classified#index page
-  config.per_page = 10
+  config.per_page = :all
 
   # Classified can be restricted by role
   config.use_effective_roles = true
@@ -21,7 +21,7 @@ EffectiveClassifieds.setup do |config|
   # Automatically end classifieds after this duration
   config.max_duration = 3.months
 
-  # Automatically approve classified submissions, otherwise require admin approval
+  # Automatically approve classified ad submissions, otherwise require admin approval
   config.auto_approve = false
 
   # Mailer Configuration

@@ -11,7 +11,7 @@ module Effective
       existing = resource_scope.in_progress.where.not(id: resource).first
 
       if existing.present?
-        flash[:success] = "You have been redirected to your existing in progress classified submission"
+        flash[:success] = "You have been redirected to your in-progress classified ad submission"
         redirect_to effective_classifieds.classified_submission_build_path(existing, existing.next_step)
       end
     end

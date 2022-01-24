@@ -1,8 +1,8 @@
-= render 'layout' do
-  .effective-classified
-    - unless @classified.published?
-      .alert.alert-warning This classified is currently unavailable.
+.effective-classified
+  - unless @classified.published?
+    .alert.alert-warning.mb-4 This classified is currently unavailable.
 
-    = render 'effective/classifieds/classified', classified: @classified do
-      .classified-body.classified-content
-        = @classified.body
+= render 'effective/classifieds/classified', classified: @classified
+
+.resource-buttons.text-left
+  = link_to 'View All Classifieds', effective_classifieds.classifieds_path, class: 'btn btn-primary'

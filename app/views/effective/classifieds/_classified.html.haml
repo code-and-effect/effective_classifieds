@@ -1,50 +1,44 @@
-.card.effective-classified
+.card
   .card-body
-    %h5.card-title= classified.title
-
     %table.table.effective-classified-table
       %tbody
+
         %tr
           %td Category
           %td= classified.category
 
         %tr
+          %td Title
+          %td= classified.title
+
+        %tr
           %td Available
           %td #{classified.start_on&.strftime('%F')} to #{classified.end_on&.strftime('%F')}
 
-        %tr
-          %td Location
-          %td= classified.location.presence || '-'
+        - if classified.website.present?
+          %tr
+            %td Location
+            %td= classified.location
 
         %tr
-          %td Website
-          %td
-            - if classified.website.present?
-              = link_to(classified.website, classified.website, target: '_blank')
-            - else
-              = '-'
+          %td Description
+          %td= classified.body
 
         %tr
-          %td Contact
+          %td Company
           %td= classified.organization
 
-        %tr
-          %td Email
-          %td
-            - if classified.email.present?
-              = mail_to(classified.email)
-            - else
-              = '-'
+        - if classified.website.present?
+          %tr
+            %td Website
+            %td= link_to(classified.website, classified.website, target: '_blank')
 
-        %tr
-          %td Phone
-          %td
-            - if classified.phone.present?
-              = classified.phone
-            - else
-              = '-'
+        - if classified.email.present?
+          %tr
+            %td Email
+            %td= mail_to(classified.email)
 
-    - if block_given?
-      = yield
-    - else
-      %p= link_to('View Classified', effective_classifieds.classified_path(classified), class: 'btn btn-primary')
+        - if classified.phone.present?
+          %tr
+            %td Phone
+            %td= classified.phone

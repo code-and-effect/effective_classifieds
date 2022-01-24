@@ -10,7 +10,7 @@ module Effective
     log_changes if respond_to?(:log_changes)
     acts_as_role_restricted if respond_to?(:acts_as_role_restricted)
 
-    # This will be the owner of the classified submission
+    # This will be the owner of the classified ad submission
     # Or the admin user that created it
     belongs_to :owner, polymorphic: true
 
@@ -21,7 +21,7 @@ module Effective
 
     acts_as_statused(
       :draft,       # Initial state
-      :submitted,   # Once submitted by the classified submission.
+      :submitted,   # Once submitted by the classified ad submission.
       :approved     # Exit state. Classified was approved.
     )
 

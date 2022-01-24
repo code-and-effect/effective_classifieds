@@ -1,8 +1,16 @@
-%h1= @page_title
+- published = Effective::Classified.classifieds(user: current_user).count
 
-= render 'layout' do
-  .effective-classifieds
-    = render partial: @classifieds, spacer_template: 'spacer'
+.resource-buttons
+  = link_to 'Submit New Classified Ad', effective_classifieds.new_classified_submission_path, class: 'btn btn-primary'
 
-  %nav.d-flex.justify-content-center
-    = bootstrap_paginate(@classifieds, per_page: EffectiveClassifieds.per_page)
+= card do
+  - if published.present?
+    - datatable = EffectiveClassifiedsDatatable.new(self, namespace: :effective)
+    = render_datatable(datatable, simple: true)
+  - else
+    %p There are no active classified ads. When there are, we'll show them here.
+
+
+
+
+
