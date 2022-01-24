@@ -2,7 +2,7 @@
 
 - published = Effective::Classified.classifieds(user: current_user).count
 
-- if published.present?
+- if published > 0
   - datatable = EffectiveClassifiedsDatatable.new(self, namespace: :effective)
   = render_datatable(datatable, simple: true)
 - else
