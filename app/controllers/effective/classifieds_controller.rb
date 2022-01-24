@@ -2,12 +2,6 @@ module Effective
   class ClassifiedsController < ApplicationController
     include Effective::CrudController
 
-    def index
-      EffectiveResources.authorize!(self, :index, Effective::Classified)
-      @classifieds = Effective::Classified.classifieds(user: current_user)
-      @page_title = "Classifieds"
-    end
-
     def show
       @classified = resource_scope.find(params[:id])
 

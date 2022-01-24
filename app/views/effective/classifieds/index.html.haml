@@ -1,16 +1,8 @@
-- published = Effective::Classified.classifieds(user: current_user).count
-
 .resource-buttons
   = link_to 'Submit New Classified Ad', effective_classifieds.new_classified_submission_path, class: 'btn btn-primary'
 
 = card do
-  - if published.present?
-    - datatable = EffectiveClassifiedsDatatable.new(self, namespace: :effective)
-    = render_datatable(datatable, simple: true)
+  - if @datatable
+    = render_datatable(@datatable, simple: true)
   - else
     %p There are no active classified ads. When there are, we'll show them here.
-
-
-
-
-

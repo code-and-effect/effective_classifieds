@@ -2,43 +2,45 @@
   .card-body
     %table.table.effective-classified-table
       %tbody
-
         %tr
-          %td Category
+          %th Category
           %td= classified.category
 
         %tr
-          %td Title
+          %th Title
           %td= classified.title
 
         %tr
-          %td Available
-          %td #{classified.start_on&.strftime('%F')} to #{classified.end_on&.strftime('%F')}
+          %th Available
+          %td
+            #{classified.start_on&.strftime('%F')}
+            to
+            #{classified.end_on&.strftime('%F')}
 
         - if classified.website.present?
           %tr
-            %td Location
+            %th Location
             %td= classified.location
 
         %tr
-          %td Description
+          %th Description
           %td= classified.body
 
         %tr
-          %td Company
+          %th Company
           %td= classified.organization
 
         - if classified.website.present?
           %tr
-            %td Website
+            %th Website
             %td= link_to(classified.website, classified.website, target: '_blank')
 
         - if classified.email.present?
           %tr
-            %td Email
+            %th Email
             %td= mail_to(classified.email)
 
         - if classified.phone.present?
           %tr
-            %td Phone
+            %th Phone
             %td= classified.phone
