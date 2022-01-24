@@ -1,50 +1,46 @@
-.card.effective-classified
+.card
   .card-body
-    %h5.card-title= classified.title
-
     %table.table.effective-classified-table
       %tbody
         %tr
-          %td Category
+          %th Category
           %td= classified.category
 
         %tr
-          %td Available
-          %td #{classified.start_on&.strftime('%F')} to #{classified.end_on&.strftime('%F')}
+          %th Title
+          %td= classified.title
 
         %tr
-          %td Location
-          %td= classified.location.presence || '-'
-
-        %tr
-          %td Website
+          %th Available
           %td
-            - if classified.website.present?
-              = link_to(classified.website, classified.website, target: '_blank')
-            - else
-              = '-'
+            #{classified.start_on&.strftime('%F')}
+            to
+            #{classified.end_on&.strftime('%F')}
+
+        - if classified.website.present?
+          %tr
+            %th Location
+            %td= classified.location
 
         %tr
-          %td Contact
+          %th Description
+          %td= classified.body
+
+        %tr
+          %th Company
           %td= classified.organization
 
-        %tr
-          %td Email
-          %td
-            - if classified.email.present?
-              = mail_to(classified.email)
-            - else
-              = '-'
+        - if classified.website.present?
+          %tr
+            %th Website
+            %td= link_to(classified.website, classified.website, target: '_blank')
 
-        %tr
-          %td Phone
-          %td
-            - if classified.phone.present?
-              = classified.phone
-            - else
-              = '-'
+        - if classified.email.present?
+          %tr
+            %th Email
+            %td= mail_to(classified.email)
 
-    - if block_given?
-      = yield
-    - else
-      %p= link_to('View Classified', effective_classifieds.classified_path(classified), class: 'btn btn-primary')
+        - if classified.phone.present?
+          %tr
+            %th Phone
+            %td= classified.phone

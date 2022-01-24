@@ -1,8 +1,8 @@
-%h1= @page_title
+.resource-buttons
+  = link_to 'Submit New Classified Ad', effective_classifieds.new_classified_submission_path, class: 'btn btn-primary'
 
-= render 'layout' do
-  .effective-classifieds
-    = render partial: @classifieds, spacer_template: 'spacer'
-
-  %nav.d-flex.justify-content-center
-    = bootstrap_paginate(@classifieds, per_page: EffectiveClassifieds.per_page)
+= card do
+  - if @datatable
+    = render_datatable(@datatable, simple: true)
+  - else
+    %p There are no active classified ads. When there are, we'll show them here.

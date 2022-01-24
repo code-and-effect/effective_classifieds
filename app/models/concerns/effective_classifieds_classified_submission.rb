@@ -83,7 +83,7 @@ module EffectiveClassifiedsClassifiedSubmission
 
   # Instance Methods
   def to_s
-    'classified submission'
+    'classified ad submission'
   end
 
   def in_progress?

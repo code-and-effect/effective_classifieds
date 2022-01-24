@@ -2,21 +2,6 @@ module Effective
   class ClassifiedsController < ApplicationController
     include Effective::CrudController
 
-    def index
-      @classifieds ||= Effective::Classified.classifieds(user: current_user)
-
-      @classifieds = @classifieds.paginate(page: params[:page])
-
-      # if params[:search].present?
-      #   search = params[:search].permit(EffectiveClassifieds.permitted_params).delete_if { |k, v| v.blank? }
-      #   @classifieds = @classifieds.where(search) if search.present?
-      # end
-
-      EffectiveResources.authorize!(self, :index, Effective::Classified)
-
-      @page_title ||= ['Classifieds', (" - Page #{params[:page]}" if params[:page])].compact.join
-    end
-
     def show
       @classified = resource_scope.find(params[:id])
 

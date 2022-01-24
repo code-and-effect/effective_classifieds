@@ -1,0 +1,5 @@
+.card
+  .card-body
+    = effective_form_with(model: @classified, engine: true) do |f|
+      = render('effective/classifieds/fields', f: f, classified: f.object)
+      = effective_submit(f)

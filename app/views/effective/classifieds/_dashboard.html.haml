@@ -2,7 +2,10 @@
 
 - published = Effective::Classified.classifieds(user: current_user).count
 
-- datatable = EffectiveClassifiedsDatatable.new(self, namespace: :effective)
-= render_datatable(datatable, simple: true)
+- if published > 0
+  - datatable = EffectiveClassifiedsDatatable.new(self, namespace: :effective)
+  = render_datatable(datatable, simple: true)
+- else
+  %p There are no active classified ads. When there are, we'll show them here.
 
 %p= link_to 'View All Classifieds', effective_classifieds.classifieds_path, class: 'btn btn-primary'

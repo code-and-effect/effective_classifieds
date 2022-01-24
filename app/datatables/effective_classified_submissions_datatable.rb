@@ -6,15 +6,15 @@ class EffectiveClassifiedSubmissionsDatatable < Effective::Datatable
     col :token, visible: false
     col :created_at, visible: false
 
-    col :submitted_at do |submission|
+    col :submitted_at, label: 'Submitted' do |submission|
       submission.submitted_at&.strftime('%F') || 'Incomplete'
     end
 
-    col :classified, search: :string
+    col :classified, search: :string, label: 'Title'
 
     col :owner, visible: false, search: :string
 
-    col :status do |submission|
+    col :status, visible: false do |submission|
       submission.classified&.status || submission.status
     end
 
@@ -22,8 +22,7 @@ class EffectiveClassifiedSubmissionsDatatable < Effective::Datatable
       if submission.draft?
         dropdown_link_to('Continue', effective_classifieds.classified_submission_build_path(submission, submission.next_step), 'data-turbolinks' => false)
       else
-        dropdown_link_to('Show', effective_classifieds.classified_submission_path(submission))
-        dropdown_link_to('Edit', effective_classifieds.edit_classified_path(submission.classified)) if submission.classified
+        dropdown_link_to('Edit', effective_classifieds.edit_classified_path(submission.classified))
       end
 
       dropdown_link_to('Delete', effective_classifieds.classified_submission_path(submission), 'data-confirm': "Really delete #{submission}?", 'data-method': :delete)

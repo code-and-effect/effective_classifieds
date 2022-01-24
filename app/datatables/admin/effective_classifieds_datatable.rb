@@ -29,7 +29,7 @@ module Admin
       end
 
       col :title
-      col :body
+      col :body, visible: false
       col :slug, visible: false
 
       col :organization
