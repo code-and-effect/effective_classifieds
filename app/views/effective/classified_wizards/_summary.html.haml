@@ -1,5 +1,5 @@
 = card('Classified Ad') do
-  - classified = classified_submission.classified
+  - classified = classified_wizard.classified
 
   %table.table.table-sm
     %tbody
@@ -16,12 +16,12 @@
         %tr
           %th Owner
           %td
-            - url = (polymorphic_admin_path(classified_submission.owner) rescue "/admin/users/#{classified_submission.owner.to_param}/edit")
-            = link_to(classified_submission.owner, url)
+            - url = (polymorphic_admin_path(classified_wizard.owner) rescue "/admin/users/#{classified_wizard.owner.to_param}/edit")
+            = link_to(classified_wizard.owner, url)
       - else
         %tr
           %th Owner
-          %td= classified_submission.owner
+          %td= classified_wizard.owner
 
       - if classified&.was_submitted?
         %tr

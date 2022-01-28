@@ -1,0 +1,10 @@
+.card
+  .card-body
+    .row
+      .col-sm
+        %h5.card-title= classified_wizard.wizard_step_title(:classified)
+      .col-sm-auto.text-right
+        = link_to('Edit', wizard_path(:classified)) if edit_effective_wizard?
+
+    - classified = classified_wizard.classified
+    = render 'effective/classifieds/classified', classified: classified

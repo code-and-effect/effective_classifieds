@@ -1,4 +1,4 @@
-class Admin::EffectiveClassifiedSubmissionsDatatable < Effective::Datatable
+class Admin::EffectiveClassifiedWizardsDatatable < Effective::Datatable
   datatable do
     order :created_at
 
@@ -16,7 +16,7 @@ class Admin::EffectiveClassifiedSubmissionsDatatable < Effective::Datatable
   end
 
   collection do
-    EffectiveSubmissions.ClassifiedSubmission.all.deep.done.joins(:classified)
+    EffectiveSubmissions.ClassifiedWizard.all.deep.done.joins(:classified)
   end
 
 end

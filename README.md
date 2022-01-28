@@ -46,7 +46,7 @@ Please add the following to your user dashboard page:
   .card-body= render 'effective/classifieds/dashboard'
 
 .card.card-dashboard.mb-4
-  .card-body= render 'effective/classified_submissions/dashboard'
+  .card-body= render 'effective/classified_wizards/dashboard'
 ```
 
 and
@@ -82,9 +82,9 @@ The permissions you actually want to define are as follows (using CanCan):
 can([:index, :show], Effective::Classified) { |classified| classified.published? }
 can([:show, :edit, :update], Effective::Classified) { |classified| classified.owner == user }
 
-can(:new, EffectiveClassifieds.ClassifiedSubmission)
-can([:show, :index, :destroy], EffectiveClassifieds.ClassifiedSubmission) { |submission| submission.owner == user }
-can([:update], EffectiveClassifieds.ClassifiedSubmission) { |submission| submission.owner == user && !submission.was_submitted? }
+can(:new, EffectiveClassifieds.ClassifiedWizard)
+can([:show, :index, :destroy], EffectiveClassifieds.ClassifiedWizard) { |submission| submission.owner == user }
+can([:update], EffectiveClassifieds.ClassifiedWizard) { |submission| submission.owner == user && !submission.was_submitted? }
 
 if user.admin?
   can :admin, :effective_classifieds
@@ -93,7 +93,7 @@ if user.admin?
   can(:approve, Classified) { |classified| classified.was_submitted? && !classified.approved? }
   can(:destroy, Classified) { |classified| !classified.draft? }
 
-  can([:index, :show], EffectiveClassifieds.ClassifiedSubmission)
+  can([:index, :show], EffectiveClassifieds.ClassifiedWizard)
 end
 ```
 

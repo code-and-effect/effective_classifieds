@@ -7,17 +7,17 @@ module EffectiveClassifieds
 
   def self.config_keys
     [
-      :classifieds_table_name, :classified_submissions_table_name,
+      :classifieds_table_name, :classified_wizards_table_name,
       :layout, :categories, :per_page, :use_effective_roles, :max_duration, :auto_approve,
-      :classified_submission_class_name,
+      :classified_wizard_class_name,
       :mailer, :parent_mailer, :deliver_method, :mailer_layout, :mailer_sender, :mailer_admin
     ]
   end
 
   include EffectiveGem
 
-  def self.ClassifiedSubmission
-    classified_submission_class_name&.constantize || Effective::ClassifiedSubmission
+  def self.ClassifiedWizard
+    classified_wizard_class_name&.constantize || Effective::ClassifiedWizard
   end
 
   def self.mailer_class

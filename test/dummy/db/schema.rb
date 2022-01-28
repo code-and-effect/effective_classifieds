@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 4) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "classified_submissions", force: :cascade do |t|
+  create_table "classified_wizards", force: :cascade do |t|
     t.string "token"
     t.integer "owner_id"
     t.string "owner_type"
@@ -60,14 +60,14 @@ ActiveRecord::Schema.define(version: 4) do
     t.datetime "submitted_at"
     t.datetime "updated_at"
     t.datetime "created_at"
-    t.index ["owner_id", "owner_type"], name: "index_classified_submissions_on_owner_id_and_owner_type"
-    t.index ["status"], name: "index_classified_submissions_on_status"
-    t.index ["token"], name: "index_classified_submissions_on_token"
+    t.index ["owner_id", "owner_type"], name: "index_classified_wizards_on_owner_id_and_owner_type"
+    t.index ["status"], name: "index_classified_wizards_on_status"
+    t.index ["token"], name: "index_classified_wizards_on_token"
   end
 
   create_table "classifieds", force: :cascade do |t|
-    t.integer "classified_submission_id"
-    t.string "classified_submission_type"
+    t.integer "classified_wizard_id"
+    t.string "classified_wizard_type"
     t.integer "owner_id"
     t.string "owner_type"
     t.string "title"

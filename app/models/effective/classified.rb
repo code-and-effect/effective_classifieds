@@ -15,7 +15,7 @@ module Effective
     belongs_to :owner, polymorphic: true
 
     # When submitted through the wizard
-    belongs_to :classified_submission, polymorphic: true, optional: true
+    belongs_to :classified_wizard, polymorphic: true, optional: true
 
     has_rich_text :body
 
@@ -102,7 +102,7 @@ module Effective
     end
 
     # Automatically approve submissions created by admins outside the submissions wizard
-    before_validation(if: -> { new_record? && classified_submission.blank? }) do
+    before_validation(if: -> { new_record? && classified_wizard.blank? }) do
       assign_attributes(status: :approved)
     end
 

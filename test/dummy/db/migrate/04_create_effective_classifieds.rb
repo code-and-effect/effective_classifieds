@@ -1,8 +1,8 @@
 class CreateEffectiveClassifieds < ActiveRecord::Migration[6.1]
   def change
     create_table :classifieds do |t|
-      t.integer :classified_submission_id
-      t.string :classified_submission_type
+      t.integer :classified_wizard_id
+      t.string :classified_wizard_type
 
       t.integer :owner_id
       t.string :owner_type
@@ -38,7 +38,7 @@ class CreateEffectiveClassifieds < ActiveRecord::Migration[6.1]
     add_index :classifieds, :end_on
     add_index :classifieds, :slug
 
-    create_table :classified_submissions do |t|
+    create_table :classified_wizards do |t|
       t.string :token
 
       t.integer :owner_id
@@ -58,8 +58,8 @@ class CreateEffectiveClassifieds < ActiveRecord::Migration[6.1]
       t.datetime :created_at
     end
 
-    add_index :classified_submissions, [:owner_id, :owner_type]
-    add_index :classified_submissions, :status
-    add_index :classified_submissions, :token
+    add_index :classified_wizards, [:owner_id, :owner_type]
+    add_index :classified_wizards, :status
+    add_index :classified_wizards, :token
   end
 end

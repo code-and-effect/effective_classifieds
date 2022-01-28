@@ -1,8 +1,0 @@
-.effective-classified-submission
-  - blacklist = EffectiveClassifieds.ClassifiedSubmission.required_wizard_steps
-  - steps = classified_submission.required_steps - blacklist
-
-  = render "effective/classified_submissions/summary", classified_submission: classified_submission
-
-  - steps.select { |step| classified_submission.has_completed_step?(step) }.each do |partial|
-    = render "effective/classified_submissions/#{partial}", classified_submission: classified_submission, step: partial

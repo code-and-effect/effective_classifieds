@@ -1,6 +1,6 @@
 EffectiveClassifieds.setup do |config|
   config.classifieds_table_name = :classifieds
-  config.classified_submissions_table_name = :classified_submissions
+  config.classified_wizards_table_name = :classified_wizards
 
   # Every classified must have a category.
   config.categories = ['Job', 'Equipment Sales', 'Other']
@@ -10,7 +10,7 @@ EffectiveClassifieds.setup do |config|
   # config.layout = { application: 'application', admin: 'admin' }
 
   # Classified Settings
-  # config.classified_submission_class_name = 'Effective::ClassifiedSubmission'
+  # config.classified_wizard_class_name = 'Effective::ClassifiedWizard'
 
   # Pagination length on the Classified#index page
   config.per_page = :all

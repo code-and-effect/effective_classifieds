@@ -9,8 +9,8 @@ EffectiveClassifieds::Engine.routes.draw do
   scope module: 'effective' do
     resources :classifieds, only: [:index, :show, :edit, :update]
 
-    resources :classified_submissions, only: [:new, :show, :destroy] do
-      resources :build, controller: :classified_submissions, only: [:show, :update]
+    resources :classified_wizards, only: [:new, :show, :destroy] do
+      resources :build, controller: :classified_wizards, only: [:show, :update]
     end
 
   end

@@ -1,0 +1,3 @@
+.effective-classified-wizard
+  - classified_wizard.render_steps.each do |partial|
+    = render "effective/classified_wizards/#{partial}", classified_wizard: classified_wizard, step: partial

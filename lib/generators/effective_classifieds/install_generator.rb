@@ -21,7 +21,7 @@ module EffectiveMemberships
 
       def create_migration_file
         @classifieds_table_name  = ':' + EffectiveClassifieds.classifieds_table_name.to_s
-        @classified_submissions_table_name  = ':' + EffectiveClassifieds.classified_submissions_table_name.to_s
+        @classified_wizards_table_name  = ':' + EffectiveClassifieds.classified_wizards_table_name.to_s
 
         migration_template ('../' * 3) + 'db/migrate/01_create_effective_classifieds.rb.erb', 'db/migrate/create_effective_classifieds.rb'
       end

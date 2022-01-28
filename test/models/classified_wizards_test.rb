@@ -1,8 +1,8 @@
 require 'test_helper'
 
-class ClassifiedSubmissionsTest < ActiveSupport::TestCase
-  test 'build_classified_submission is valid' do
-    submission = build_classified_submission()
+class ClassifiedWizardsTest < ActiveSupport::TestCase
+  test 'build_classified_wizard is valid' do
+    submission = build_classified_wizard()
     assert submission.valid?
     submission.save!
 
@@ -14,7 +14,7 @@ class ClassifiedSubmissionsTest < ActiveSupport::TestCase
   end
 
   test 'submit' do
-    submission = build_classified_submission()
+    submission = build_classified_wizard()
     submission.save!
 
     assert_email do
@@ -27,7 +27,7 @@ class ClassifiedSubmissionsTest < ActiveSupport::TestCase
   end
 
   test 'submit with auto approve' do
-    submission = build_classified_submission()
+    submission = build_classified_wizard()
     submission.save!
 
     existing = EffectiveClassifieds.auto_approve

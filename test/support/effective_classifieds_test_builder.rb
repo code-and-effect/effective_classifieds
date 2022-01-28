@@ -34,10 +34,10 @@ module EffectiveClassifiedsTestBuilder
     )
   end
 
-  def build_classified_submission(classified: nil)
+  def build_classified_wizard(classified: nil)
     classified ||= build_classified()
 
-    Effective::ClassifiedSubmission.new(
+    Effective::ClassifiedWizard.new(
       classified: classified,
       owner: classified.owner
     )

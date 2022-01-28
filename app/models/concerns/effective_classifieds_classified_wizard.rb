@@ -1,28 +1,20 @@
 # frozen_string_literal: true
 
-# EffectiveClassifiedsClassifiedSubmission
+# EffectiveClassifiedsClassifiedWizard
 #
-# Mark your owner model with effective_classifieds_classified_submission to get all the includes
+# Mark your owner model with effective_classifieds_classified_wizard to get all the includes
 
-module EffectiveClassifiedsClassifiedSubmission
+module EffectiveClassifiedsClassifiedWizard
   extend ActiveSupport::Concern
 
   module Base
-    def effective_classifieds_classified_submission
-      include ::EffectiveClassifiedsClassifiedSubmission
+    def effective_classifieds_classified_wizard
+      include ::EffectiveClassifiedsClassifiedWizard
     end
   end
 
   module ClassMethods
-    def effective_classifieds_classified_submission?; true; end
-
-    def all_wizard_steps
-      const_get(:WIZARD_STEPS).keys
-    end
-
-    def required_wizard_steps
-      [:start, :summary, :submitted]
-    end
+    def effective_classifieds_classified_wizard?; true; end
   end
 
   included do
@@ -47,7 +39,7 @@ module EffectiveClassifiedsClassifiedSubmission
     accepts_nested_attributes_for :owner
 
     # Effective Namespace
-    has_one :classified, class_name: 'Effective::Classified', inverse_of: :classified_submission, dependent: :destroy
+    has_one :classified, class_name: 'Effective::Classified', inverse_of: :classified_wizard, dependent: :destroy
     accepts_nested_attributes_for :classified, reject_if: :all_blank, allow_destroy: true
 
     effective_resource do
