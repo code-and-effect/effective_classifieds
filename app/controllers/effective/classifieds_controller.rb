@@ -26,7 +26,7 @@ module Effective
     private
 
     def permitted_params
-      params.require(:effective_classified).permit!.except(:status, :status_steps)
+      params.require(:effective_classified).except(:status, :status_steps).permit!
     end
 
   end
