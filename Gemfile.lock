@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    effective_classifieds (0.1.0)
+    effective_classifieds (0.2.1)
       effective_bootstrap
       effective_datatables (>= 4.0.0)
       effective_resources
@@ -108,7 +108,7 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
-    effective_bootstrap (0.10.4)
+    effective_bootstrap (0.10.5)
       bootstrap (< 5)
       coffee-rails
       effective_resources
@@ -117,7 +117,7 @@ GEM
       jquery-rails
       rails (>= 4.0.0)
       sassc
-    effective_datatables (4.10.4)
+    effective_datatables (4.10.5)
       coffee-rails
       effective_bootstrap
       effective_resources

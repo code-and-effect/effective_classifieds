@@ -16,7 +16,7 @@ class Admin::EffectiveClassifiedWizardsDatatable < Effective::Datatable
   end
 
   collection do
-    EffectiveSubmissions.ClassifiedWizard.all.deep.done.joins(:classified)
+    EffectiveClassifieds.ClassifiedWizard.all.deep.done.joins(:classified)
   end
 
 end
