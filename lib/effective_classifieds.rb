@@ -24,22 +24,4 @@ module EffectiveClassifieds
     mailer&.constantize || Effective::ClassifiedsMailer
   end
 
-  def self.parent_mailer_class
-    return parent_mailer.constantize if parent_mailer.present?
-    ActionMailer::Base
-  end
-
-  def self.send_email(email, *args)
-    raise('expected args to be an Array') unless args.kind_of?(Array)
-
-    if defined?(Tenant)
-      tenant = Tenant.current || raise('expected a current tenant')
-      args.last.kind_of?(Hash) ? args.last.merge!(tenant: tenant) : args << { tenant: tenant }
-    end
-
-    deliver_method = EffectiveClassifieds.deliver_method || EffectiveResources.deliver_method
-
-    EffectiveClassifieds.mailer_class.send(email, *args).send(deliver_method)
-  end
-
 end

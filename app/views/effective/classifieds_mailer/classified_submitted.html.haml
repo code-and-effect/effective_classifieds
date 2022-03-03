@@ -12,7 +12,7 @@
 
 %hr
 
-- if !@classified.published?
+- unless @classified.approved?
   %p= link_to('Approve Classified Ad', effective_classifieds.edit_admin_classified_path(@classified))
 
 %p= link_to('View Classified Ad', effective_classifieds.classified_path(@classified))
