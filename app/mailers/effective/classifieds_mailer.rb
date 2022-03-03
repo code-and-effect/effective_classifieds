@@ -2,7 +2,7 @@ module Effective
   class ClassifiedsMailer < EffectiveClassifieds.parent_mailer_class
 
     default from: -> { EffectiveClassifieds.mailer_sender }
-    layout -> { EffectiveClassifieds.mailer_layout || 'effective_classifieds_mailer_layout' }
+    layout -> { EffectiveClassifieds.mailer_layout }
 
     def classified_submitted(resource, opts = {})
       raise('expected an Effective::Classification') unless resource.kind_of?(Effective::Classified)

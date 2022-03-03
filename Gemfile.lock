@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    effective_classifieds (0.2.1)
+    effective_classifieds (0.2.2)
       effective_bootstrap
       effective_datatables (>= 4.0.0)
       effective_resources
@@ -126,7 +126,7 @@ GEM
     effective_developer (0.6.8)
       effective_resources
       rails (>= 3.2.0)
-    effective_resources (1.9.7)
+    effective_resources (1.14.0)
       rails (>= 4.0.0)
     effective_roles (2.3.0)
       effective_resources
