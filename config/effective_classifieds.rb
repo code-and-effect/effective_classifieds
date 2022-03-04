@@ -37,5 +37,4 @@ EffectiveClassifieds.setup do |config|
   # config.mailer_layout = nil      # Default mailer layout
   # config.mailer_sender = nil      # Default From value
   # config.mailer_admin = nil       # Default To value for Admin correspondence
-
 end

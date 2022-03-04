@@ -5,7 +5,7 @@ module Effective
     layout -> { EffectiveClassifieds.mailer_layout }
 
     def classified_submitted(resource, opts = {})
-      raise('expected an Effective::Classification') unless resource.kind_of?(Effective::Classified)
+      raise('expected an Effective::Classified') unless resource.kind_of?(Effective::Classified)
 
       @classified = resource
 
