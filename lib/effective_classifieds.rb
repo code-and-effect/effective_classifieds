@@ -8,7 +8,7 @@ module EffectiveClassifieds
   def self.config_keys
     [
       :classifieds_table_name, :classified_wizards_table_name,
-      :mailer, :parent_mailer, :deliver_method, :mailer_layout, :mailer_sender, :mailer_admin,
+      :mailer, :parent_mailer, :deliver_method, :mailer_layout, :mailer_sender, :mailer_admin, :mailer_subject,
       :layout, :categories, :per_page, :use_effective_roles, :max_duration, :auto_approve,
       :classified_wizard_class_name
     ]

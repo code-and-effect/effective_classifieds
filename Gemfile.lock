@@ -126,7 +126,7 @@ GEM
     effective_developer (0.6.8)
       effective_resources
       rails (>= 3.2.0)
-    effective_resources (1.14.0)
+    effective_resources (1.15.0)
       rails (>= 4.0.0)
     effective_roles (2.3.0)
       effective_resources
