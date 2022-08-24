@@ -21,8 +21,10 @@
 - if f.object.persisted? && !f.object.draft?
   = f.check_box :archived, label: 'Yes, this classified is archived and will not be displayed'
 
-= f.rich_text_area :body, label: 'Body content', hint: 'The main body content of your classified ad. Be sure to include all relevant information!'
-
+- if defined?(EffectiveArticleEditor)
+  = f.article_editor :body, label: 'Body content', hint: 'The main body content of your classified ad. Be sure to include all relevant information!'
+- else
+  = f.rich_text_area :body, label: 'Body content', hint: 'The main body content of your classified ad. Be sure to include all relevant information!'
 
 %h2.mt-5.mb-0 Contact Information
 %p
