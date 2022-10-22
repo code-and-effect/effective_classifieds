@@ -123,7 +123,7 @@ module EffectiveClassifiedsClassifiedWizard
   end
 
   def no_checkout_required?
-    required_steps.exclude?(:billing) && requird_steps.include?(:checkout)
+    required_steps.exclude?(:billing) && required_steps.exclude?(:checkout)
   end
 
   def classified
@@ -141,10 +141,8 @@ module EffectiveClassifiedsClassifiedWizard
 
   # After the configure Classified step
   def classified!
-    if checkout_required?
-      assign_pricing() if classified.present?
-      raise('expected classified to have a price') if classified.price.blank?
-    end
+    assign_pricing() if classified.present?
+    raise('expected classified to have a price') if classified.price.blank?
 
     save!
   end
