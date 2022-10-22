@@ -17,14 +17,19 @@
             to
             #{classified.end_on&.strftime('%F')}
 
-        - if classified.website.present?
+        - if classified.location.present?
           %tr
             %th Location
             %td= classified.location
 
         %tr
           %th Description
-          %td= classified.body
+          %td= classified.body.to_s
+
+        - if classified.file.attached?
+          %tr
+            %th Attachment
+            %td= link_to(classified.file.filename, main_app.url_for(classified.file), target: '_blank')
 
         %tr
           %th Company

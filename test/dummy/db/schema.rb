@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 4) do
     t.text "status_steps"
     t.text "wizard_steps"
     t.datetime "submitted_at"
+    t.string "price_category"
     t.datetime "updated_at"
     t.datetime "created_at"
     t.index ["owner_id", "owner_type"], name: "index_classified_wizards_on_owner_id_and_owner_type"
@@ -85,6 +86,10 @@ ActiveRecord::Schema.define(version: 4) do
     t.integer "roles_mask"
     t.boolean "authenticate_user", default: false
     t.boolean "archived", default: false
+    t.integer "purchased_order_id"
+    t.integer "price"
+    t.boolean "tax_exempt", default: false
+    t.string "qb_item_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["end_on"], name: "index_classifieds_on_end_on"

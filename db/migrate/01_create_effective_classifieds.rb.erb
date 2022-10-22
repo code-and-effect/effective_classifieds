@@ -30,6 +30,12 @@ class CreateEffectiveClassifieds < ActiveRecord::Migration[6.1]
 
       t.boolean :archived, default: false
 
+      # Acts as purchasable
+      t.integer :purchased_order_id
+      t.integer :price
+      t.boolean :tax_exempt, default: false
+      t.string :qb_item_name
+
       t.timestamps
     end
 
@@ -51,6 +57,9 @@ class CreateEffectiveClassifieds < ActiveRecord::Migration[6.1]
 
       # Dates
       t.datetime :submitted_at
+
+      # Pricing
+      t.string :price_category
 
       t.datetime :updated_at
       t.datetime :created_at

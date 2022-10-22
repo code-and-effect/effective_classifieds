@@ -1,14 +1,29 @@
 = render 'layout' do
   = render 'effective/classified_wizards/content', resource: resource
 
+  - classified = resource.classified
+
   - raise('expected a submitted classified_wizard') unless resource.was_submitted?
+  - raise('expected a submitted classified') unless classified.was_submitted?
+
+  - if resource.checkout_required?
+    - raise('expected a purchased classified submit_order') unless resource.submit_order&.purchased?
 
   .alert.alert-warning.mb-4
-    Successfully submitted on #{resource.submitted_at.strftime('%F')}.
+    Successfully submitted on #{classified.submitted_at.strftime('%F')}.
+
+  - unless classified.approved?
+    = card do
+      %p Your classified must still be approved before it will be displayed.
 
   = link_to "Return to Dashboard", root_path, class: 'btn btn-lg btn-primary mb-4'
 
   = render 'effective/classified_wizards/summary', classified_wizard: resource
   = render 'effective/classified_wizards/classified_wizard', classified_wizard: resource
+
+  - if resource.orders.present?
+    .mb-4
+      = collapse('Show orders...', card_class: 'my-2') do
+        = render 'effective/classified_wizards/orders', classified_wizard: resource
 
   = link_to "Return to Dashboard", root_path, class: 'btn btn-lg btn-primary'

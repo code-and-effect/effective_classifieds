@@ -7,6 +7,12 @@
     = tab 'Access' do
       = render '/admin/classifieds/form_access', classified: classified
 
+    - if classified.classified_wizard.present?
+      = tab 'Orders' do
+        %h2 Orders
+        - datatable = Admin::EffectiveOrdersDatatable.new(parent: classified.classified_wizard, owner: classified.owner, user: classified.owner, total: false)
+        = render_datatable(datatable, simple: true)
+
     - if classified.respond_to?(:log_changes_datatable)
       = tab 'Logs' do
         = render_inline_datatable(classified.log_changes_datatable)

@@ -10,7 +10,7 @@ class EffectiveClassifiedWizardsDatatable < Effective::Datatable
       wizard.submitted_at&.strftime('%F') || 'Incomplete'
     end
 
-    col :classified, search: :string, label: 'Title'
+    col :classifieds, search: :string, label: 'Title'
 
     col :owner, visible: false, search: :string
 
@@ -30,7 +30,7 @@ class EffectiveClassifiedWizardsDatatable < Effective::Datatable
   end
 
   collection do
-    EffectiveClassifieds.ClassifiedWizard.deep.where(owner: current_user).left_joins(:classified)
+    EffectiveClassifieds.ClassifiedWizard.deep.where(owner: current_user)
   end
 
 end
