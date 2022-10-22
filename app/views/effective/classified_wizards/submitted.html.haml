@@ -10,7 +10,7 @@
     - raise('expected a purchased classified submit_order') unless resource.submit_order&.purchased?
 
   .alert.alert-warning.mb-4
-    Successfully submitted on #{classified.submitted_at.strftime('%F')}.
+    This classified was submitted on #{classified.submitted_at.strftime('%F')}.
 
   - unless classified.approved?
     = card do

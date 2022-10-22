@@ -37,10 +37,19 @@ module EffectiveClassifiedsTestBuilder
   def build_classified_wizard(classified: nil)
     classified ||= build_classified()
 
-    Effective::ClassifiedWizard.new(
-      classified: classified,
-      owner: classified.owner
-    )
+    wizard = Effective::ClassifiedWizard.new(owner: classified.owner)
+    wizard.classifieds << classified
+
+    wizard
+  end
+
+  def build_submitted_classified_wizard(classified: nil)
+    classified_wizard = build_classified_wizard(classified: classified)
+
+    classified_wizard.ready!
+    classified_wizard.submit_order.purchase!
+    classified_wizard.reload
+    classified_wizard
   end
 
 end
