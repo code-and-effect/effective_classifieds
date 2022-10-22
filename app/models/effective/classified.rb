@@ -7,6 +7,7 @@ module Effective
     attr_accessor :current_user
 
     acts_as_slugged
+    acts_as_purchasable
     log_changes if respond_to?(:log_changes)
     acts_as_role_restricted if respond_to?(:acts_as_role_restricted)
 
@@ -17,6 +18,7 @@ module Effective
     # When submitted through the wizard
     belongs_to :classified_wizard, polymorphic: true, optional: true
 
+    has_one_attached :file
     has_rich_text :body
 
     acts_as_statused(
@@ -103,7 +105,7 @@ module Effective
 
     # Automatically approve submissions created by admins outside the submissions wizard
     before_validation(if: -> { new_record? && classified_wizard.blank? }) do
-      assign_attributes(status: :approved)
+      assign_attributes(status: :approved, price: 0)
     end
 
     validates :title, presence: true, length: { maximum: 200 }
@@ -131,6 +133,10 @@ module Effective
 
     validate(if: -> { category.present? }) do
       self.errors.add(:category, 'is invalid') unless Array(EffectiveClassifieds.categories).include?(category)
+    end
+
+    validate(if: -> { file.attached? && !Rails.env.test? }) do
+      self.errors.add(:file, 'expected a .pdf file') unless file.content_type == 'application/pdf'
     end
 
     def to_s

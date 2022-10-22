@@ -26,6 +26,8 @@
 - else
   = f.rich_text_area :body, label: 'Body content', hint: 'The main body content of your classified ad. Be sure to include all relevant information!'
 
+= f.file_field :file, label: 'Attach PDF'
+
 %h2.mt-5.mb-0 Contact Information
 %p
   %small.text-muted Contact information will be displayed on the classified ad.

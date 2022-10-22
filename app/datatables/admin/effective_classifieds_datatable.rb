@@ -45,6 +45,8 @@ module Admin
         col :status, search: ['submitted', 'approved']
       end
 
+      col :purchased_order, visible: false
+
       actions_col do |classified|
         dropdown_link_to('View Classified', effective_classifieds.classified_path(classified), target: '_blank')
       end
