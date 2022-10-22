@@ -55,6 +55,10 @@ module Effective
 
       archived           :boolean
 
+      price         :integer
+      tax_exempt    :boolean
+      qb_item_name  :string
+
       timestamps
     end
 
