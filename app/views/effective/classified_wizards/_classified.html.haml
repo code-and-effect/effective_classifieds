@@ -7,4 +7,4 @@
         = link_to('Edit', wizard_path(:classified)) if edit_effective_wizard?
 
     - classified = classified_wizard.classified
-    = render 'effective/classifieds/classified', classified: classified
+    = render 'effective/classifieds/summary', classified: classified

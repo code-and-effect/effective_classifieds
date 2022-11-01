@@ -5,10 +5,9 @@
   - datatable = EffectiveResources.best('EffectiveClassifiedWizardsDatatable').new(self, namespace: :effective)
 
   - if submission.present?
-    %h2 In-progress Classified Ads
+    %h2 In-progress Postings
 
-    %p
-      Your submission for #{submission.classified.presence || 'a classified'} is incomplete.
+    %p Your posting submission is incomplete:
 
     %p
       Please
@@ -19,12 +18,12 @@
 
     %hr
 
-  %h2 Classified Ads
+  %h2= EffectiveClassifieds.classifieds_label
 
   - if datatable.present?
     = render_simple_datatable(datatable)
   - else
-    %p You don't have any classified ads. When you do, we'll show them here.
+    %p You don't have any postings. When you do, we'll show them here.
 
   - if submission.blank?
-    %p= link_to 'Submit New Classified Ad', effective_classifieds.new_classified_wizard_path, class: 'btn btn-primary'
+    %p= link_to "Submit New #{EffectiveClassifieds.classifieds_label} Posting", effective_classifieds.new_classified_wizard_path, class: 'btn btn-primary'

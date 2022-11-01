@@ -1,10 +1,10 @@
 = effective_form_with(model: classified, url: classified.persisted? ? effective_classifieds.admin_classified_path(classified.id) : effective_classifieds.admin_classifieds_path) do |f|
-  = f.check_box :authenticate_user, label: 'Yes, the user must be be signed in to view this classified', hint: 'Sign up is required to register for any classified'
+  = f.check_box :authenticate_user, label: 'Yes, the user must be be signed in to view', hint: 'Sign up is required to register for any classified'
 
   - if EffectiveClassifieds.use_effective_roles
     = f.checks :roles, EffectiveRoles.roles_collection(f.object)
 
   %p.text-hint
-    * leave blank for a regular public classified that anyone can view
+    * Do not select a role to allow anyone with an account to view
 
   = f.submit

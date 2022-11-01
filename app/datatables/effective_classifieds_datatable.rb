@@ -4,16 +4,15 @@ class EffectiveClassifiedsDatatable < Effective::Datatable
     length :all
     order :start_on
 
-    col :start_on, as: :date, label: 'Posted'
+    col :start_on, as: :date, label: 'Published'
+    col :end_on, as: :date, label: 'Closing'
 
     col :title do |classified|
       link_to classified, effective_classifieds.classified_path(classified)
     end
 
-    col :end_on, as: :date, label: 'Expires', visible: false
-
-    col :organization, visible: false
-    col :location, visible: false
+    col :organization
+    col :location
 
     col :body, visible: false
     col :website, visible: false

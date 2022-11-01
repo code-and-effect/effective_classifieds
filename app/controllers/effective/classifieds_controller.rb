@@ -14,9 +14,8 @@ module Effective
       if EffectiveResources.authorized?(self, :admin, :effective_classifieds)
         flash.now[:warning] = [
           'Hi Admin!',
-          ('You are viewing a hidden classified.' unless @classified.published?),
-          'Click here to',
-          ("<a href='#{effective_classifieds.edit_admin_classified_path(@classified)}' class='alert-link'>edit classified settings</a>.")
+          ('You are viewing a hidden posting.' unless @classified.published?),
+          ("<a href='#{effective_classifieds.edit_admin_classified_path(@classified)}' class='alert-link'>Click here to edit settings</a>.")
         ].compact.join(' ')
       end
 

@@ -5,4 +5,4 @@
 
   = effective_form_with(model: resource, url: wizard_path(step), method: :put) do |f|
     = f.hidden_field :id
-    = f.submit 'Submit Classified Ad', class: 'btn btn-primary'
+    = f.submit "Submit #{EffectiveClassifieds.classifieds_label} Posting", class: 'btn btn-primary'

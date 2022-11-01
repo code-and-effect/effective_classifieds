@@ -28,7 +28,7 @@ module EffectiveClassifiedsClassifiedWizard
 
     acts_as_wizard(
       start: 'Start',
-      classified: 'Classified',
+      classified: 'Posting',
       summary: 'Review',
       billing: 'Billing Address',
       checkout: 'Checkout',
@@ -107,7 +107,7 @@ module EffectiveClassifiedsClassifiedWizard
 
   # Instance Methods
   def to_s
-    'classified ad submission'
+    'posting submission'
   end
 
   def in_progress?

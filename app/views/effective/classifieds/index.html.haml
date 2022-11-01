@@ -1,8 +1,9 @@
-.resource-buttons
-  = link_to 'Submit New Classified Ad', effective_classifieds.new_classified_wizard_path, class: 'btn btn-primary'
+= render 'layout' do
+  .resource-buttons
+    = link_to "Submit New #{EffectiveClassifieds.classifieds_label} Posting", effective_classifieds.new_classified_wizard_path, class: 'btn btn-primary'
 
-= card do
-  - if @datatable.present?(self)
-    = render_datatable(@datatable, simple: true)
-  - else
-    %p There are no active classified ads. When there are, we'll show them here.
+  = card do
+    - if @datatable.present?(self)
+      = render_datatable(@datatable, simple: true)
+    - else
+      %p There are no active postings. When there are, we'll show them here.

@@ -1,5 +1,5 @@
 = f.select :category, EffectiveClassifieds.categories, required: true
-= f.text_field :title
+= f.text_field :title, label: "#{EffectiveClassifieds.classifieds_label} Posting Title"
 = f.text_field :location
 
 - if f.object.persisted? || f.object.errors.include?(:slug)
@@ -11,20 +11,20 @@
 .row
   .col-lg-6
     = f.date_field :start_on, label: "Start",
-      hint: 'The classified ad will be displayed starting after this date.',
+      hint: 'The posting will be displayed starting after this date.',
       input_js: { minDate: minDate.strftime('%F') }
 
   .col-lg-6
     = f.date_field :end_on, label: "Expire",
-      hint: 'The classified ad will no longer be displayed after this date.'
+      hint: 'The posting will no longer be displayed after this date.'
 
 - if f.object.persisted? && !f.object.draft?
-  = f.check_box :archived, label: 'Yes, this classified is archived and will not be displayed'
+  = f.check_box :archived, label: 'Yes, this posting is archived. It will not be displayed.'
 
 - if defined?(EffectiveArticleEditor)
-  = f.article_editor :body, label: 'Body content', hint: 'The main body content of your classified ad. Be sure to include all relevant information!'
+  = f.article_editor :body, label: 'Description', hint: 'The content of your posting. Be sure to include all relevant information!'
 - else
-  = f.rich_text_area :body, label: 'Body content', hint: 'The main body content of your classified ad. Be sure to include all relevant information!'
+  = f.rich_text_area :body, label: 'Description', hint: 'The content of your posting. Be sure to include all relevant information!'
 
 = f.file_field :file, label: 'Attach PDF'
 
