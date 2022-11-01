@@ -3,13 +3,12 @@
 
   .card
     .card-body
-      %p
-        Welcome #{current_user}!
+      %p Welcome #{current_user}!
 
       %p
-        You can use this wizard to post a new classified ad.
+        You can use this wizard to submit a new #{EffectiveClassifieds.classifieds_label} posting.
         Your progress will be saved as you move through the wizard.
-        Once the ad published you will be able to come back and edit/change the details.
+        Once your posting is published you are able to come back and edit the details.
 
       = effective_form_with(model: resource, url: wizard_path(step), method: :put) do |f|
         = f.hidden_field :id

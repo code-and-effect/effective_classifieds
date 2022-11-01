@@ -1,30 +1,29 @@
-= card('Classified Ad') do
-  - classified = classified_wizard.classified
+- classified = classified_wizard.classified
 
-  %table.table.table-sm
-    %tbody
+%table.table.table-sm
+  %tbody
+    %tr
+      %th.border-0 Posting
+      %td.border-0
+
+        - if classified&.published?
+          = link_to(classified, effective_classifieds.classified_path(classified), target: '_blank')
+        - else
+          = classified.presence || 'Posting was deleted'
+
+    - if request.path.start_with?('/admin')
       %tr
-        %th.border-0 Classified
-        %td.border-0
+        %th Owner
+        %td
+          - url = (polymorphic_admin_path(classified_wizard.owner) rescue "/admin/users/#{classified_wizard.owner.to_param}/edit")
+          = link_to(classified_wizard.owner, url)
+    - else
+      %tr
+        %th Owner
+        %td= classified_wizard.owner
 
-          - if classified&.published?
-            = link_to(classified, effective_classifieds.classified_path(classified), target: '_blank')
-          - else
-            = classified.presence || 'Classified was deleted'
-
-      - if request.path.start_with?('/admin')
-        %tr
-          %th Owner
-          %td
-            - url = (polymorphic_admin_path(classified_wizard.owner) rescue "/admin/users/#{classified_wizard.owner.to_param}/edit")
-            = link_to(classified_wizard.owner, url)
-      - else
-        %tr
-          %th Owner
-          %td= classified_wizard.owner
-
-      - if classified&.was_submitted?
-        %tr
-          %th Status
-          %td
-            %span.badge.badge-secondary= classified.status
+    - if classified&.was_submitted?
+      %tr
+        %th Status
+        %td
+          %span.badge.badge-secondary= classified.status

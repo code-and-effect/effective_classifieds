@@ -12,6 +12,9 @@ EffectiveClassifieds.setup do |config|
   # Classified Settings
   # config.classified_wizard_class_name = 'Effective::ClassifiedWizard'
 
+  # Page title like Classifieds or Job Board
+  config.classifieds_label = 'Classifieds'
+
   # Pagination length on the Classified#index page
   config.per_page = :all
 
