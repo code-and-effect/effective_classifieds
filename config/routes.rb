@@ -8,6 +8,7 @@ EffectiveClassifieds::Engine.routes.draw do
   # Public routes
   scope module: 'effective' do
     resources :classifieds, only: [:index, :show, :edit, :update]
+    resources :jobs, only: [:index, :show, :edit, :update], controller: 'classifieds'
 
     resources :classified_wizards, only: [:new, :show, :destroy] do
       resources :build, controller: :classified_wizards, only: [:show, :update]
@@ -19,6 +20,8 @@ EffectiveClassifieds::Engine.routes.draw do
     resources :classifieds, except: [:show] do
       post :approve, on: :member
     end
+
+    resources :jobs, except: [:show], controller: 'classifieds'
   end
 
 end
