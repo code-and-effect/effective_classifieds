@@ -10,13 +10,13 @@
 
 .row
   .col-lg-6
-    = f.date_field :start_on, label: "Start",
-      hint: 'The posting will be displayed starting after this date.',
-      input_js: { minDate: minDate.strftime('%F') }
+    - if f.object.new_record?
+      = f.date_field :start_on, label: "Start", hint: 'The posting will be displayed starting after this date.', input_js: { minDate: minDate.strftime('%F') }
+    - else
+      = f.date_field :start_on, label: "Start", hint: 'The posting will be displayed starting after this date.'
 
   .col-lg-6
-    = f.date_field :end_on, label: "Expire",
-      hint: 'The posting will no longer be displayed after this date.'
+    = f.date_field :end_on, label: "Expire", hint: 'The posting will no longer be displayed after this date.'
 
 - if f.object.persisted? && !f.object.draft?
   = f.check_box :archived, label: 'Yes, this posting is archived. It will not be displayed.'

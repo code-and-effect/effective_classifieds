@@ -5,6 +5,7 @@ module Effective
     self.table_name = EffectiveClassifieds.classifieds_table_name.to_s
 
     attr_accessor :current_user
+    attr_accessor :importing
 
     acts_as_slugged
     acts_as_purchasable
@@ -118,11 +119,13 @@ module Effective
 
     validates :start_on, presence: true
     validates :end_on, presence: true
-    validates :location, presence: true
 
-    validates :organization, presence: true
-    validates :email, presence: true
-    validates :phone, presence: true
+    with_options(unless: -> { importing }) do
+      validates :location, presence: true
+      validates :organization, presence: true
+      validates :email, presence: true
+      validates :phone, presence: true
+    end
 
     validate(if: -> { start_on.present? && end_on.present? }) do
       self.errors.add(:end_on, 'must be after start date') if end_on < start_on
