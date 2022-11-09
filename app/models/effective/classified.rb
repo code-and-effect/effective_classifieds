@@ -150,6 +150,10 @@ module Effective
       title.presence || 'New Classified'
     end
 
+    def purchasable_name
+      "Posting - #{to_s}"
+    end
+
     def published?
       return false unless approved?
       return false if archived?
