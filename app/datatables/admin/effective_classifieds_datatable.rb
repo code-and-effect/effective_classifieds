@@ -8,6 +8,7 @@ module Admin
         scope :approved
       end
 
+      scope :draft
       scope :published
     end
 
@@ -39,11 +40,10 @@ module Admin
       col :email
       col :phone
 
+      col :status
       col :archived
 
-      unless EffectiveClassifieds.auto_approve
-        col :status, search: ['submitted', 'approved']
-      end
+      col :status
 
       col :purchased_order, visible: false
 
@@ -53,7 +53,7 @@ module Admin
     end
 
     collection do
-      Effective::Classified.all.where.not(status: :draft)
+      Effective::Classified.all
     end
 
     def categories
