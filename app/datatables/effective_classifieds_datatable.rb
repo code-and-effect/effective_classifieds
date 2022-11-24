@@ -2,7 +2,7 @@
 class EffectiveClassifiedsDatatable < Effective::Datatable
   datatable do
     length :all
-    order :start_on
+    order :end_on
 
     col :start_on, as: :date, label: 'Published'
     col :end_on, as: :date, label: 'Closing'
