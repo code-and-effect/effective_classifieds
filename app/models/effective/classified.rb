@@ -63,7 +63,7 @@ module Effective
       timestamps
     end
 
-    scope :sorted, -> { order(:id) }
+    scope :sorted, -> { order(end_on: :desc) }
     scope :deep, -> { with_rich_text_body }
 
     scope :upcoming, -> { where(arel_table[:end_on].gt(Time.zone.now)) }
@@ -87,7 +87,7 @@ module Effective
     }
 
     scope :classifieds, -> (user: nil, unpublished: false) {
-      scope = all.deep.sorted
+      scope = all.deep
 
       if defined?(EffectiveRoles) && EffectiveClassifieds.use_effective_roles
         scope = scope.for_role(user&.roles)
