@@ -16,7 +16,7 @@
     .alert.alert-danger.mb-4
       Your posting must still be approved before it will be displayed.
 
-  = link_to "Return to Dashboard", root_path, class: 'btn btn-lg btn-primary mb-4'
+  = link_to "Return to Dashboard", return_to_dashboard_path, class: 'btn btn-lg btn-primary btn-block'
 
   = render 'effective/classified_wizards/summary', classified_wizard: resource
   = render 'effective/classified_wizards/classified_wizard', classified_wizard: resource
@@ -26,4 +26,4 @@
       = collapse('Show orders...', card_class: 'my-2') do
         = render 'effective/classified_wizards/orders', classified_wizard: resource
 
-  = link_to "Return to Dashboard", root_path, class: 'btn btn-lg btn-primary'
+  = link_to "Return to Dashboard", return_to_dashboard_path, class: 'btn btn-lg btn-primary btn-block'
