@@ -63,7 +63,7 @@ module Effective
       timestamps
     end
 
-    scope :sorted, -> { order(end_on: :desc) }
+    scope :sorted, -> { order(start_on: :desc) }
     scope :deep, -> { with_rich_text_body }
 
     scope :upcoming, -> { where(arel_table[:end_on].gt(Time.zone.now)) }
