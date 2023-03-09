@@ -151,7 +151,7 @@ module Effective
     end
 
     def purchasable_name
-      "Posting - #{to_s}"
+      "#{category} - #{title}"
     end
 
     def published?
