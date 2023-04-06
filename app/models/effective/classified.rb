@@ -127,11 +127,11 @@ module Effective
       validates :phone, presence: true
     end
 
-    validate(if: -> { start_on.present? && end_on.present? }) do
+    validate(if: -> { start_on.present? && end_on.present? && !importing }) do
       self.errors.add(:end_on, 'must be after start date') if end_on < start_on
     end
 
-    validate(if: -> { start_on.present? && end_on.present? && EffectiveClassifieds.max_duration.present? }) do
+    validate(if: -> { start_on.present? && end_on.present? && EffectiveClassifieds.max_duration.present? && !importing }) do
       if (end_on - start_on) > EffectiveClassifieds.max_duration
         distance = ApplicationController.helpers.distance_of_time_in_words(end_on + EffectiveClassifieds.max_duration, end_on).gsub('about', '').strip
         self.errors.add(:end_on, "must be within #{distance} of start date")
