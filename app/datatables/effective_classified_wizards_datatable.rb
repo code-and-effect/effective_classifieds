@@ -21,11 +21,16 @@ class EffectiveClassifiedWizardsDatatable < Effective::Datatable
     actions_col(actions: []) do |wizard|
       if wizard.draft?
         dropdown_link_to('Continue', effective_classifieds.classified_wizard_build_path(wizard, wizard.next_step), 'data-turbolinks' => false)
-      else
+      elsif wizard.classified.present?
+        dropdown_link_to('Show', effective_classifieds.classified_path(wizard.classified))
         dropdown_link_to('Edit', effective_classifieds.edit_classified_path(wizard.classified))
+        dropdown_link_to('Show Wizard', effective_classifieds.classified_wizard_path(wizard), 'data-turbolinks' => false)
       end
 
-      dropdown_link_to('Delete', effective_classifieds.classified_wizard_path(wizard), 'data-confirm': "Really delete #{wizard}?", 'data-method': :delete)
+      if EffectiveResources.authorized?(self, :destroy, wizard)
+        dropdown_link_to('Delete', effective_classifieds.classified_wizard_path(wizard), 'data-confirm': "Really delete #{wizard}?", 'data-method': :delete)
+      end
+
     end
   end
 
