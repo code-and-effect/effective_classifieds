@@ -3,7 +3,7 @@
 %table.table.table-sm
   %tbody
     %tr
-      %th.border-0 Posting
+      %th.border-0= classified_label
       %td.border-0
 
         - if classified&.published?
@@ -13,13 +13,13 @@
 
     - if request.path.start_with?('/admin')
       %tr
-        %th Owner
+        %th Submitted by
         %td
           - url = (polymorphic_admin_path(classified_wizard.owner) rescue "/admin/users/#{classified_wizard.owner.to_param}/edit")
           = link_to(classified_wizard.owner, url)
     - else
       %tr
-        %th Owner
+        %th Submitted by
         %td= classified_wizard.owner
 
     - if classified&.was_submitted?

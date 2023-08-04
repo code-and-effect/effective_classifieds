@@ -1,5 +1,5 @@
 = tabs do
-  = tab 'Posting' do
+  = tab(et(classified)) do
     = render 'admin/classifieds/form_classified', classified: classified
 
   - if classified.persisted?

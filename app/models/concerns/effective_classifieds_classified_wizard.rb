@@ -107,7 +107,7 @@ module EffectiveClassifiedsClassifiedWizard
 
   # Instance Methods
   def to_s
-    'posting submission'
+    model_name.human
   end
 
   def in_progress?

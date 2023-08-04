@@ -1,5 +1,5 @@
 = f.select :category, EffectiveClassifieds.categories, required: true
-= f.text_field :title, label: "#{EffectiveClassifieds.classifieds_label} Posting Title"
+= f.text_field :title
 = f.text_field :location
 
 - if f.object.persisted? || f.object.errors.include?(:slug)
@@ -11,7 +11,7 @@
 .row
   .col-lg-6
     - if f.object.new_record?
-      = f.date_field :start_on, label: "Start", hint: 'The posting will be displayed starting after this date.', input_js: { minDate: minDate.strftime('%F') }
+      = f.date_field :start_on, label: "Start", hint: "The posting will be displayed starting after this date.", input_js: { minDate: minDate.strftime('%F') }
     - else
       = f.date_field :start_on, label: "Start", hint: 'The posting will be displayed starting after this date.'
 
@@ -26,13 +26,13 @@
 - else
   = f.rich_text_area :body, label: 'Description', hint: 'The content of your posting. Be sure to include all relevant information!'
 
-= f.file_field :file, label: 'Attach PDF'
+= f.file_field :file, hint: 'Please attach a PDF'
 
 %h2.mt-5.mb-0 Contact Information
 %p
-  %small.text-muted Contact information will be displayed on the classified ad.
+  %small.text-muted Contact information will be displayed on the #{classifieds_name_label} ad.
 
-= f.text_field :organization, label: 'Company or Organization'
+= f.text_field :organization, hint: 'Organization or company name'
 = f.url_field :website
 = f.email_field :email
 = f.tel_field :phone

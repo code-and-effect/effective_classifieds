@@ -147,7 +147,7 @@ module Effective
     end
 
     def to_s
-      title.presence || 'New Classified'
+      title.presence || model_name.human
     end
 
     def purchasable_name
