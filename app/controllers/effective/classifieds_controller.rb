@@ -2,7 +2,7 @@ module Effective
   class ClassifiedsController < ApplicationController
     include Effective::CrudController
 
-    page_title(only: :index) { EffectiveClassifieds.classifieds_label }
+    page_title(only: :index) { view_context.classifieds_name_label }
 
     def show
       @classified = resource_scope.find(params[:id])

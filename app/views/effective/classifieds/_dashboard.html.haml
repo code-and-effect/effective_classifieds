@@ -1,4 +1,4 @@
-%h2= EffectiveClassifieds.classifieds_label
+%h2= classifieds_name_label
 
 - published = Effective::Classified.classifieds(user: current_user).count
 
@@ -6,6 +6,6 @@
   - datatable = EffectiveClassifiedsDatatable.new(self, namespace: :effective)
   = render_datatable(datatable, simple: true)
 - else
-  %p There are no active postings. When there are, we'll show them here.
+  %p There are no active #{classifieds_label.downcase}. When there are, we'll show them here.
 
 %p= link_to 'View All', effective_classifieds.classifieds_path, class: 'btn btn-primary'

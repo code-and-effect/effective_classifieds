@@ -49,7 +49,7 @@ module Admin
       col :purchased_order, visible: false
 
       actions_col do |classified|
-        dropdown_link_to('View Classified', effective_classifieds.classified_path(classified), target: '_blank')
+        dropdown_link_to("View #{classified_label}", effective_classifieds.classified_path(classified), target: '_blank')
       end
     end
 

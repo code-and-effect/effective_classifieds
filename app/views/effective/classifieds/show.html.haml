@@ -1,7 +1,7 @@
 = render 'layout' do
   .effective-classified
     - unless @classified.published?
-      .alert.alert-warning.mb-4 This posting is not published.
+      .alert.alert-warning.mb-4 This #{etd(@classified)} is not published.
 
     .row
       .col-md-4

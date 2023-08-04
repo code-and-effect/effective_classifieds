@@ -5,25 +5,25 @@
   - datatable = EffectiveResources.best('EffectiveClassifiedWizardsDatatable').new(self, namespace: :effective)
 
   - if submission.present?
-    %h2 In-progress Postings
+    %h2 In-progress #{classifieds_label}
 
-    %p Your posting submission is incomplete:
+    %p Your submission is incomplete:
 
     %p
       Please
-      = link_to("Continue submission for #{submission.classified.presence || 'a classified'}", effective_classifieds.classified_wizard_build_path(submission, submission.next_step), 'data-turbolinks' => false, class: 'btn btn-primary')
+      = link_to("Continue submission", effective_classifieds.classified_wizard_build_path(submission, submission.next_step), 'data-turbolinks' => false, class: 'btn btn-primary')
       or you can
       = link_to('Abandon submission', effective_classifieds.classified_wizard_path(submission), 'data-confirm': "Really delete #{submission}?", 'data-method': :delete, class: 'btn btn-danger')
       to submit another.
 
     %hr
 
-  %h2= EffectiveClassifieds.classifieds_label
+  %h2= classifieds_label
 
   - if datatable.present?
     = render_simple_datatable(datatable)
   - else
-    %p You don't have any postings. When you do, we'll show them here.
+    %p You don't have any #{classifieds_label.downcase}. When you do, we'll show them here.
 
   - if submission.blank?
-    %p= link_to "Submit New #{EffectiveClassifieds.classifieds_label} Posting", effective_classifieds.new_classified_wizard_path, class: 'btn btn-primary'
+    %p= link_to "Submit New #{classified_label}", effective_classifieds.new_classified_wizard_path, class: 'btn btn-primary'

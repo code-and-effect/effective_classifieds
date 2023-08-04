@@ -1,10 +1,9 @@
 en:
   effective_classifieds:
-    name: 'Effective Classifieds'
-    acronym: 'Classifieds'
+    name: 'Classifieds'
 
   activerecord:
     models:
       # These ones might be app level
-      app/classified_wizard: 'Classified Wizard'
-      effective/classified: 'Classified'
+      app/classified_wizard: 'Classified Posting Submission'
+      effective/classified: 'Classified Posting'
