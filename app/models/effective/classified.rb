@@ -177,5 +177,9 @@ module Effective
       approved!
     end
 
+    def unapprove!
+      unapproved!
+    end
+
   end
 end

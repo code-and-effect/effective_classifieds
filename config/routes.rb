@@ -19,6 +19,7 @@ EffectiveClassifieds::Engine.routes.draw do
   namespace :admin do
     resources :classifieds, except: [:show] do
       post :approve, on: :member
+      post :unapprove, on: :member
     end
 
     resources :jobs, except: [:show], controller: 'classifieds'
