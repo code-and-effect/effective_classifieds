@@ -20,7 +20,7 @@ module EffectiveMemberships
       end
 
       def create_migration_file
-        migration_template ('../' * 3) + 'db/migrate/01_create_effective_classifieds.rb.erb', 'db/migrate/create_effective_classifieds.rb'
+        migration_template ('../' * 3) + 'db/migrate/101_create_effective_classifieds.rb', 'db/migrate/create_effective_classifieds.rb'
       end
 
     end

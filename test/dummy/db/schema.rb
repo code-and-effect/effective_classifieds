@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 6) do
+ActiveRecord::Schema.define(version: 101) do
 
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
@@ -101,7 +101,6 @@ ActiveRecord::Schema.define(version: 6) do
     t.datetime "updated_at"
     t.datetime "created_at"
     t.index ["owner_id", "owner_type"], name: "index_classified_wizards_on_owner_id_and_owner_type"
-    t.index ["status"], name: "index_classified_wizards_on_status"
     t.index ["token"], name: "index_classified_wizards_on_token"
   end
 
@@ -131,10 +130,8 @@ ActiveRecord::Schema.define(version: 6) do
     t.string "qb_item_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["end_on"], name: "index_classifieds_on_end_on"
     t.index ["owner_id", "owner_type"], name: "index_classifieds_on_owner_id_and_owner_type"
     t.index ["slug"], name: "index_classifieds_on_slug"
-    t.index ["start_on"], name: "index_classifieds_on_start_on"
   end
 
   create_table "customers", force: :cascade do |t|
