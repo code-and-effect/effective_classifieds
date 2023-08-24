@@ -2,7 +2,7 @@
 
 module Effective
   class Classified < ActiveRecord::Base
-    self.table_name = EffectiveClassifieds.classifieds_table_name.to_s
+    self.table_name = (EffectiveClassifieds.classifieds_table_name || :classifieds).to_s
 
     attr_accessor :current_user
     attr_accessor :importing
