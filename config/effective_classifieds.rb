@@ -1,7 +1,4 @@
 EffectiveClassifieds.setup do |config|
-  config.classifieds_table_name = :classifieds
-  config.classified_wizards_table_name = :classified_wizards
-
   # Every classified must have a category.
   config.categories = ['Job', 'Equipment Sales', 'Other']
 
