@@ -112,12 +112,12 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
-    effective_addresses (1.10.4)
+    effective_addresses (1.11.0)
       carmen
       coffee-rails
       effective_resources
       rails (>= 3.2.0)
-    effective_bootstrap (1.14.14)
+    effective_bootstrap (1.14.16)
       bootstrap (< 5)
       coffee-rails
       effective_resources
@@ -135,7 +135,7 @@ GEM
     effective_developer (0.6.8)
       effective_resources
       rails (>= 3.2.0)
-    effective_orders (6.7.3)
+    effective_orders (6.8.1)
       coffee-rails
       effective_addresses
       effective_bootstrap
@@ -145,9 +145,9 @@ GEM
       sassc
     effective_resources (1.15.0)
       rails (>= 4.0.0)
-    effective_roles (2.4.0)
+    effective_roles (2.5.0)
       effective_resources
-      rails (>= 3.2.0)
+      rails
     effective_test_bot (1.2.9)
       capybara (>= 2.15)
       effective_resources
