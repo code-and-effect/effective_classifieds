@@ -125,6 +125,7 @@ module Effective
       validates :organization, presence: true
       validates :email, presence: true
       validates :phone, presence: true
+      validates :contact_name, presence: true
     end
 
     validate(if: -> { start_on.present? && end_on.present? && !importing }) do
