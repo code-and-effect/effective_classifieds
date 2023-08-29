@@ -3,48 +3,44 @@
     - unless @classified.published?
       .alert.alert-warning.mb-4 This #{etd(@classified)} is not published.
 
-    .row
-      .col-md-4
-        %ul.list-unstyled
-          %li
-            %strong Company
-            = @classified.organization
 
-          - if @classified.location.present?
-            %li
-              %strong Location
-              = @classified.location
+    .resource-buttons
+      = link_to "Return to  #{classifieds_name_label}", effective_classifieds.classifieds_path, class: 'btn btn-secondary'
 
-          %li
-            %strong Published
-            #{@classified.start_on&.strftime("%b %d, %Y")}
+    = card do
+      .row
+        .col-md
+          %table.table.table-striped.table-hover.effective-table-summary
+            %tr
+              %th Position
+              %td= @classified.title
 
-          %li
-            %strong Closing
-            #{@classified.end_on&.strftime("%b %d, %Y")}
+            %tr
+              %th Company
+              %td= @classified.organization
 
+              - if @classified.location.present?
+                %tr
+                  %th Location
+                  %td= @classified.location
 
-          - if @classified.file.attached?
-            %li
-              %strong Attachment
-              = link_to(@classified.file.filename, main_app.url_for(@classified.file), target: '_blank')
+        .col-md
+          %table.table.table-striped.table-hover.effective-table-summary
+            %tr
+              %th Published
+              %td #{@classified.start_on&.strftime("%b %d, %Y")}
 
+            %tr
+              %th Closing
+              %td #{@classified.end_on&.strftime("%b %d, %Y")}
 
-        %ul.list-unstyled
-          - if @classified.website.present?
-            %li
-              %strong Website
-              = link_to(@classified.website, @classified.website, target: '_blank')
+            - if @classified.file.attached?
+              %tr
+                %th Attachment
+                %td= link_to(@classified.file.filename, main_app.url_for(@classified.file), target: '_blank')
 
-          - if @classified.email.present?
-            %li
-              %strong Email
-              = mail_to(@classified.email)
+    .body.mt-4
+      = @classified.body.to_s
 
-          - if @classified.phone.present?
-            %li
-              %strong Phone
-              = @classified.phone
-
-      .col-md-8
-        = @classified.body.to_s
+    .resource-buttons.mt-5.mb-4
+      = link_to "Return to  #{classifieds_name_label}", effective_classifieds.classifieds_path, class: 'btn btn-secondary'

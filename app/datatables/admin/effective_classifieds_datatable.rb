@@ -37,9 +37,10 @@ module Admin
       col :organization
       col :location
 
-      col :website
-      col :email
-      col :phone
+      col :website, visible: false
+      col :contact_name, visible: false
+      col :email, visible: false
+      col :phone, visible: false
 
       col :status
       col :archived

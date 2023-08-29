@@ -2,8 +2,20 @@
   .resource-buttons
     = link_to "Submit New #{et(Effective::Classified)}", effective_classifieds.new_classified_wizard_path, class: 'btn btn-primary'
 
-  = card do
-    - if @datatable.present?(self)
-      = render_datatable(@datatable, simple: true)
-    - else
-      %p There are no active #{etsd(Effective::Classified)}. When there are, we'll show them here.
+  - if @classifieds.present?
+    .table-responsive
+      %table.table.table-striped.table-hover
+        %tr
+          %th.col-date Published
+          %th.col-date.d-none.d-md-table-cell Closing
+          %th Title
+          %th.d-none.d-md-table-cell Location
+
+        = render @classifieds
+
+    .resource-buttons
+      = link_to "Submit New #{et(Effective::Classified)}", effective_classifieds.new_classified_wizard_path, class: 'btn btn-primary'
+
+  - else
+    = card class: 'mt-5' do
+      %p.text-center There are no active #{etsd(Effective::Classified)}. When there are, we'll show them here.

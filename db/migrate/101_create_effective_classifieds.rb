@@ -14,6 +14,7 @@ class CreateEffectiveClassifieds < ActiveRecord::Migration[6.0]
       t.string :location
 
       t.string :website
+      t.string :contact_name
       t.string :email
       t.string :phone
 

@@ -1,5 +1,6 @@
-= f.select :category, EffectiveClassifieds.categories, required: true
+= f.select :category, EffectiveClassifieds.categories, required: true, include_blank: false
 = f.text_field :title
+= f.text_field :organization, hint: 'Organization or company name'
 = f.text_field :location
 
 - if f.object.persisted? || f.object.errors.include?(:slug)
@@ -22,17 +23,17 @@
   = f.check_box :archived, label: 'Yes, this posting is archived. It will not be displayed.'
 
 - if defined?(EffectiveArticleEditor)
-  = f.article_editor :body, label: 'Description', hint: 'The content of your posting. Be sure to include all relevant information!'
+  = f.article_editor :body, label: 'Description', hint: 'The content of your posting. Be sure to include all relevant information.'
 - else
-  = f.rich_text_area :body, label: 'Description', hint: 'The content of your posting. Be sure to include all relevant information!'
+  = f.rich_text_area :body, label: 'Description', hint: 'The content of your posting. Be sure to include all relevant information.'
 
-= f.file_field :file, hint: 'Please attach a PDF'
+= f.file_field :file, hint: 'Optionally attach a PDF for this posting'
 
 %h2.mt-5.mb-0 Contact Information
 %p
-  %small.text-muted Contact information will be displayed on the #{classifieds_name_label} ad.
+  %small.text-muted The following contact information is not displayed to the public and is only used by staff to provide support.
 
-= f.text_field :organization, hint: 'Organization or company name'
+= f.text_field :contact_name
 = f.url_field :website
 = f.email_field :email
 = f.tel_field :phone

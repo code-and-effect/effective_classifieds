@@ -114,6 +114,7 @@ ActiveRecord::Schema.define(version: 101) do
     t.string "organization"
     t.string "location"
     t.string "website"
+    t.string "contact_name"
     t.string "email"
     t.string "phone"
     t.datetime "start_on"
