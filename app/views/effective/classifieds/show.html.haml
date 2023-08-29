@@ -29,22 +29,5 @@
               %strong Attachment
               = link_to(@classified.file.filename, main_app.url_for(@classified.file), target: '_blank')
 
-
-        -# %ul.list-unstyled
-        -#   - if @classified.website.present?
-        -#     %li
-        -#       %strong Website
-        -#       = link_to(@classified.website, @classified.website, target: '_blank')
-
-        -#   - if @classified.email.present?
-        -#     %li
-        -#       %strong Email
-        -#       = mail_to(@classified.email)
-
-        -#   - if @classified.phone.present?
-        -#     %li
-        -#       %strong Phone
-        -#       = @classified.phone
-
         .body.mt-4
           = @classified.body.to_s
