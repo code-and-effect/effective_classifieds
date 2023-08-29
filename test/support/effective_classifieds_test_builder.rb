@@ -27,6 +27,7 @@ module EffectiveClassifiedsTestBuilder
       category: EffectiveClassifieds.categories.first,
       organization: 'Adams Restaurant',
       location: 'California',
+      contact_name: 'Staff',
       email: 'someone@example.com',
       phone: '(444) 444-4444',
       start_on: Time.zone.now,
