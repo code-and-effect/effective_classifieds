@@ -35,6 +35,11 @@
       %th Company
       %td= classified.organization
 
+    - if classified.contact_name.present?
+      %tr
+        %th Contact Name
+        %td= classified.contact_name
+
     - if classified.website.present?
       %tr
         %th Website
