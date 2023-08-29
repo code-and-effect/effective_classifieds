@@ -1,10 +1,8 @@
-- classifieds = ::Effective::Classified.classifieds(user: current_user).paginate(page: params[:page], per_page: 12)
-
 = render 'layout' do
   .resource-buttons
     = link_to "Submit New #{et(Effective::Classified)}", effective_classifieds.new_classified_wizard_path, class: 'btn btn-primary'
 
-  - if classifieds.present?
+  - if @classifieds.present?
     .actions.d-flex.flex-row-reverse.my-3
       - ['list', 'grid'].each do |view_type|
         = link_to effective_classifieds.classifieds_path(view_type: view_type, page: params[:page]), class: "btn #{params[:view_type].blank? && view_type == 'list' && 'btn-primary'} #{params[:view_type] == view_type ? 'btn-primary' : 'btn-default'} btn-sm" do
@@ -13,7 +11,7 @@
             = view_type.capitalize
 
     .row
-      - classifieds.each do |classified|
+      - @classifieds.each do |classified|
         .mb-3{ class: params[:view_type] == 'grid' ? 'col-12 col-sm-6 col-md-4 col-xl-3' : 'col-12' }
           .card.h-100
             .card-body.d-flex.flex-column
@@ -32,7 +30,7 @@
                   = classified.end_on&.strftime("%b %d, %Y")
 
     .row.d-flex.justify-content-center
-      = paginate(classifieds, per_page: 12)
+      = paginate(@classifieds, per_page: EffectiveClassifieds.per_page)
   - else
     = card class: 'mt-5' do
       %p.text-center There are no active #{etsd(Effective::Classified)}. When there are, we'll show them here.

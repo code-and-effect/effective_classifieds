@@ -10,7 +10,7 @@ EffectiveClassifieds.setup do |config|
   # config.classified_wizard_class_name = 'Effective::ClassifiedWizard'
 
   # Pagination length on the Classified#index page
-  config.per_page = :all
+  config.per_page = 12
 
   # Classified can be restricted by role
   config.use_effective_roles = true
