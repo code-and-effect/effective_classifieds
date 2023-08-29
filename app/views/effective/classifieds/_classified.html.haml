@@ -1,56 +1,8 @@
--# TODO turn this into a partial that is rendered on index
+%tr
+  %td.col-date= classified.start_on&.strftime("%b %d, %Y")
+  %td.col-date.d-none.d-md-table-cell= classified.end_on&.strftime("%b %d, %Y")
+  %td
+    %strong= link_to classified.title, effective_classifieds.classified_path(classified)
+    .text-muted= classified.organization
 
-%table.table.effective-classified-table
-  %tbody
-    %tr
-      %th Category
-      %td= classified.category
-
-    %tr
-      %th Title
-      %td= classified.title
-
-    %tr
-      %th Available
-      %td
-        #{classified.start_on&.strftime('%F')}
-        to
-        #{classified.end_on&.strftime('%F')}
-
-    - if classified.location.present?
-      %tr
-        %th Location
-        %td= classified.location
-
-    %tr
-      %th Description
-      %td= classified.body.to_s
-
-    - if classified.file.attached?
-      %tr
-        %th Attachment
-        %td= link_to(classified.file.filename, main_app.url_for(classified.file), target: '_blank')
-
-    %tr
-      %th Company
-      %td= classified.organization
-
-    - if classified.contact_name.present?
-      %tr
-        %th Contact Name
-        %td= classified.contact_name
-
-    - if classified.website.present?
-      %tr
-        %th Website
-        %td= link_to(classified.website, classified.website, target: '_blank')
-
-    - if classified.email.present?
-      %tr
-        %th Email
-        %td= mail_to(classified.email)
-
-    - if classified.phone.present?
-      %tr
-        %th Phone
-        %td= classified.phone
+  %td.d-none.d-md-table-cell= classified.location

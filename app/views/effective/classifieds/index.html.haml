@@ -3,34 +3,19 @@
     = link_to "Submit New #{et(Effective::Classified)}", effective_classifieds.new_classified_wizard_path, class: 'btn btn-primary'
 
   - if @classifieds.present?
-    .actions.d-flex.flex-row-reverse.my-3
-      - ['list', 'grid'].each do |view_type|
-        = link_to effective_classifieds.classifieds_path(view_type: view_type, page: params[:page]), class: "btn #{params[:view_type].blank? && view_type == 'list' && 'btn-primary'} #{params[:view_type] == view_type ? 'btn-primary' : 'btn-default'} btn-sm" do
-          %span.px-1
-            = icon(view_type)
-            = view_type.capitalize
+    .table-responsive
+      %table.table.table-striped.table-hover
+        %tr
+          %th.col-date Published
+          %th.col-date.d-none.d-md-table-cell Closing
+          %th Title
+          %th.d-none.d-md-table-cell Location
 
-    .row
-      - @classifieds.each do |classified|
-        .mb-3{ class: params[:view_type] == 'grid' ? 'col-12 col-sm-6 col-md-4 col-xl-3' : 'col-12' }
-          .card.h-100
-            .card-body.d-flex.flex-column
-              %h5.card-title
-                = link_to classified.title, effective_classifieds.classified_path(classified), class: 'stretched-link text-decoration-none'
-              %p.card-text.pt-2
-                = classified.organization
-                %br
-                = classified.location
-              %p.card-text.mt-auto
-                %small.text-muted
-                  %strong Published
-                  = classified.start_on&.strftime("%b %d, %Y")
-                  %br
-                  %strong Closing
-                  = classified.end_on&.strftime("%b %d, %Y")
+        = render @classifieds
 
-    .row.d-flex.justify-content-center
-      = paginate(@classifieds, per_page: EffectiveClassifieds.per_page)
+    .resource-buttons
+      = link_to "Submit New #{et(Effective::Classified)}", effective_classifieds.new_classified_wizard_path, class: 'btn btn-primary'
+
   - else
     = card class: 'mt-5' do
       %p.text-center There are no active #{etsd(Effective::Classified)}. When there are, we'll show them here.

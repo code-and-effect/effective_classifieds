@@ -7,9 +7,7 @@ module Effective
 
       @page_title ||= view_context.classifieds_name_label
 
-      @classifieds = ::Effective::Classified
-        .classifieds(user: current_user)
-        .paginate(page: params[:page], per_page: EffectiveClassifieds.per_page)
+      @classifieds = ::Effective::Classified.classifieds(user: current_user).sorted
     end
 
     def show
