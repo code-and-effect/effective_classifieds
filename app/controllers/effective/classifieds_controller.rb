@@ -28,6 +28,12 @@ module Effective
       end
 
       @page_title ||= @classified.to_s
+
+      respond_to do |format|
+        format.html { }
+        format.js { render('show', formats: :js) }
+      end
+
     end
 
     private
