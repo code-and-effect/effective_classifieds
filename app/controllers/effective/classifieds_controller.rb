@@ -31,7 +31,11 @@ module Effective
 
       respond_to do |format|
         format.html { }
-        format.js { render('show', formats: :js) }
+
+        format.json {
+          url = effective_classifieds.classified_url(@classified, format: :json)
+          render(json: @classified.for_json.merge(url: url).to_json)
+        }
       end
 
     end

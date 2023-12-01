@@ -154,6 +154,10 @@ module Effective
       title.presence || model_name.human
     end
 
+    def for_json
+      { id: id, title: title, body: body.to_s, created_at: created_at, updated_at: updated_at }
+    end
+
     def purchasable_name
       "#{category} - #{title}"
     end
