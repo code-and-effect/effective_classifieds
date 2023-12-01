@@ -64,7 +64,10 @@ module Effective
     end
 
     scope :sorted, -> { order(start_on: :desc) }
-    scope :deep, -> { with_rich_text_body }
+
+    scope :deep, -> { 
+      with_rich_text_body.with_attached_file.includes(:classified_wizard, :owner, :purchased_order) 
+    }
 
     scope :upcoming, -> { where(arel_table[:end_on].gt(Time.zone.now)) }
     scope :past, -> { where(arel_table[:end_on].lteq(Time.zone.now)) }
