@@ -2,4 +2,4 @@
   = render 'effective/classified_wizards/content', resource: resource
 
   = card do
-    = render_checkout_step2(resource.submit_order, purchased_url: wizard_path(:submitted), deferred_url: wizard_path(:checkout), declined_url: wizard_path(:checkout))
+    = render_checkout_step2(resource.submit_order, purchased_url: wizard_path(:submitted), deferred_url: wizard_path(:checkout), declined_url: wizard_path(:checkout), skip_deferred: EffectiveClassifieds.skip_deferred)

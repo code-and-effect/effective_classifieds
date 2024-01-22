@@ -21,6 +21,9 @@ EffectiveClassifieds.setup do |config|
   # Automatically approve classified ad submissions, otherwise require admin approval
   config.auto_approve = false
 
+  # Can checkout with phone or cheque 'deferred' payment providers
+  config.skip_deferred = false
+
   # Mailer Settings
   # Please see config/initializers/effective_resources.rb for default effective_* gem mailer settings
   #
