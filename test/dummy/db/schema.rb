@@ -154,7 +154,7 @@ ActiveRecord::Schema.define(version: 101) do
     t.integer "purchasable_id"
     t.string "name"
     t.integer "quantity"
-    t.integer "price", default: 0
+    t.integer "price"
     t.boolean "tax_exempt"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -166,10 +166,15 @@ ActiveRecord::Schema.define(version: 101) do
   create_table "orders", force: :cascade do |t|
     t.integer "user_id"
     t.string "user_type"
+    t.integer "organization_id"
+    t.string "organization_type"
     t.integer "parent_id"
     t.string "parent_type"
-    t.string "state"
+    t.string "status"
+    t.text "status_steps"
     t.datetime "purchased_at"
+    t.integer "purchased_by_id"
+    t.string "purchased_by_type"
     t.text "note"
     t.text "note_to_buyer"
     t.text "note_internal"
@@ -180,8 +185,12 @@ ActiveRecord::Schema.define(version: 101) do
     t.string "payment_provider"
     t.string "payment_card"
     t.decimal "tax_rate", precision: 6, scale: 3
+    t.decimal "surcharge_percent", precision: 6, scale: 3
     t.integer "subtotal"
     t.integer "tax"
+    t.integer "amount_owing"
+    t.integer "surcharge"
+    t.integer "surcharge_tax"
     t.integer "total"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
