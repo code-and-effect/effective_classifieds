@@ -1,54 +1,59 @@
 require 'test_helper'
 
 class ClassifiedWizardsTest < ActiveSupport::TestCase
-  # TODO: Rewrite these
+  test 'build_classified_wizard is valid' do
+    submission = build_classified_wizard()
+    assert submission.valid?
+    submission.save!
 
+    assert submission.draft?
 
-  # test 'build_classified_wizard is valid' do
-  #   submission = build_classified_wizard()
-  #   assert submission.valid?
-  #   submission.save!
+    assert submission.classified.present?
+    assert submission.classified.valid?
+    assert submission.classified.draft?
+  end
 
-  #   assert submission.draft?
+  test 'submit' do
+    classified_wizard = build_classified_wizard()
+    classified_wizard.save!
 
-  #   assert submission.classified.present?
-  #   assert submission.classified.valid?
-  #   assert submission.classified.draft?
-  # end
+    classified_wizard.ready!
 
-  # test 'submit' do
-  #   submission = build_classified_wizard()
-  #   submission.save!
+    # Invoices and submitted email
+    assert_email(count: 3) do
+      classified_wizard.submit_order.purchase!
+    end
 
-  #   assert_email do
-  #     EffectiveResources.transaction { submission.submit! }
-  #   end
+    classified_wizard.reload
 
-  #   assert submission.submitted?
-  #   assert submission.classified.submitted?
-  #   refute submission.classified.published?
-  # end
+    assert classified_wizard.submitted?
+    assert classified_wizard.classified.submitted?
+    refute classified_wizard.classified.published?
+  end
 
-  # test 'submit with auto approve' do
-  #   submission = build_classified_wizard()
-  #   submission.save!
+  test 'submit with auto approve' do
+    classified_wizard = build_classified_wizard()
+    classified_wizard.save!
+    classified_wizard.ready!
 
-  #   existing = EffectiveClassifieds.auto_approve
+    existing = EffectiveClassifieds.auto_approve
 
-  #   begin
-  #     EffectiveClassifieds.auto_approve = true
+    begin
+      EffectiveClassifieds.auto_approve = true
 
-  #     assert_email do
-  #       EffectiveResources.transaction { submission.submit! }
-  #     end
+      assert_email do
+        classified_wizard.submit_order.purchase!
+      end
 
-  #   ensure
-  #     EffectiveClassifieds.auto_approve = existing
-  #   end
+    ensure
+      EffectiveClassifieds.auto_approve = existing
+    end
 
-  #   assert submission.submitted?
-  #   assert submission.classified.approved?
-  #   assert submission.classified.published?
-  # end
+    classified_wizard.reload
+
+    assert classified_wizard.submitted?
+    assert classified_wizard.classified.approved?
+    assert classified_wizard.classified.published?
+  end
 
 end

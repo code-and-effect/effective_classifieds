@@ -22,7 +22,7 @@ EffectiveClassifieds.setup do |config|
   config.auto_approve = false
 
   # Can checkout with phone or cheque 'deferred' payment providers
-  config.skip_deferred = false
+  config.skip_deferred = true
 
   # Mailer Settings
   # Please see config/initializers/effective_resources.rb for default effective_* gem mailer settings
