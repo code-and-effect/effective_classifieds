@@ -38,9 +38,10 @@ module EffectiveClassifiedsTestBuilder
   def build_classified_wizard(classified: nil)
     classified ||= build_classified()
 
-    wizard = Effective::ClassifiedWizard.new(owner: classified.owner)
+    wizard = EffectiveClassifieds.ClassifiedWizard.new(owner: classified.owner)
     wizard.classifieds << classified
 
+    wizard.classified!
     wizard
   end
 

@@ -17,7 +17,7 @@
       = f.date_field :start_on, label: "Start", hint: 'The posting will be displayed starting after this date.'
 
   .col-lg-6
-    = f.date_field :end_on, label: "Expire", hint: 'The posting will no longer be displayed after this date.'
+    = f.date_field :end_on, label: "Expire", hint: "The posting will no longer be displayed after this date. Please enter a date within #{f.object.end_on_distance} of start date"
 
 - if f.object.persisted? && !f.object.draft?
   = f.check_box :archived, label: 'Yes, this posting is archived. It will not be displayed.'

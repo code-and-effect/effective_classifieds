@@ -135,10 +135,14 @@ module Effective
       self.errors.add(:end_on, 'must be after start date') if end_on < start_on
     end
 
+    def end_on_distance
+      date = Time.zone.now
+      ApplicationController.helpers.distance_of_time_in_words(date + EffectiveClassifieds.max_duration, date).gsub('about', '').strip
+    end
+
     validate(if: -> { start_on.present? && end_on.present? && EffectiveClassifieds.max_duration.present? && !importing }) do
       if (end_on - start_on) > EffectiveClassifieds.max_duration
-        distance = ApplicationController.helpers.distance_of_time_in_words(end_on + EffectiveClassifieds.max_duration, end_on).gsub('about', '').strip
-        self.errors.add(:end_on, "must be within #{distance} of start date")
+        self.errors.add(:end_on, "must be within #{end_on_distance} of start date")
       end
     end
 
