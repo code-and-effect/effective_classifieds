@@ -37,6 +37,9 @@ class CreateEffectiveClassifieds < ActiveRecord::Migration[6.0]
       t.boolean :tax_exempt, default: false
       t.string :qb_item_name
 
+      # Acts as trackable
+      t.integer :tracks_count, default: 0
+
       t.timestamps
     end
 

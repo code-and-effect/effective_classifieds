@@ -13,6 +13,11 @@
         - datatable = Admin::EffectiveOrdersDatatable.new(parent: classified.classified_wizard, owner: classified.owner, user: classified.owner, total: false)
         = render_datatable(datatable, simple: true)
 
+    - if classified.class.respond_to?(:acts_as_trackable?)
+      = tab 'Tracks' do
+        - datatable = Admin::EffectiveTracksDatatable.new(owner: classified)
+        = render_datatable(datatable, inline: true, namespace: :admin)
+
     - if classified.respond_to?(:log_changes_datatable)
       = tab 'Logs' do
         = render_inline_datatable(classified.log_changes_datatable)

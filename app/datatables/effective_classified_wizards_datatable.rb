@@ -12,6 +12,10 @@ class EffectiveClassifiedWizardsDatatable < Effective::Datatable
 
     col :classifieds, search: :string, label: 'Title'
 
+    col :tracks_count, label: 'Views' do |wizard|
+      wizard.classified&.tracks_count
+    end
+
     col :owner, visible: false, search: :string
 
     col :status, visible: false do |wizard|

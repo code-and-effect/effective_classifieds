@@ -46,6 +46,7 @@ module Admin
       col :archived
 
       col :status
+      col :tracks_count, label: 'Views'
 
       col :purchased_order, visible: false
 

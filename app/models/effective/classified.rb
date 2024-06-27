@@ -10,6 +10,7 @@ module Effective
     acts_as_slugged
     acts_as_purchasable
     log_changes if respond_to?(:log_changes)
+    acts_as_trackable if respond_to?(:acts_as_trackable)
     acts_as_role_restricted if respond_to?(:acts_as_role_restricted)
 
     # This will be the owner of the classified ad submission
