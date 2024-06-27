@@ -37,7 +37,6 @@ module Effective
           render(json: @classified.for_json.merge(url: url).to_json)
         }
       end
-
     end
 
     private
