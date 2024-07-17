@@ -11,6 +11,7 @@ class Admin::EffectiveClassifiedWizardsDatatable < Effective::Datatable
 
     col :classified, search: :string
     col :owner
+    col :user, visible: false
 
     col :orders
 

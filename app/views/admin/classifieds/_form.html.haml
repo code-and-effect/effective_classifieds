@@ -3,15 +3,20 @@
     = render 'admin/classifieds/form_classified', classified: classified
 
   - if classified.persisted?
-
-    = tab 'Access' do
-      = render '/admin/classifieds/form_access', classified: classified
-
     - if classified.classified_wizard.present?
+      = tab(et(EffectiveClassifieds.ClassifiedWizard)) do
+        = card('Wizard') do
+          = render('effective/classified_wizards/summary', classified_wizard: classified.classified_wizard)
+
+        = render('effective/classified_wizards/classified_wizard', classified_wizard: classified.classified_wizard)
+
       = tab 'Orders' do
         %h2 Orders
         - datatable = Admin::EffectiveOrdersDatatable.new(parent: classified.classified_wizard, owner: classified.owner, user: classified.owner, total: false)
         = render_datatable(datatable, simple: true)
+
+    = tab 'Access' do
+      = render '/admin/classifieds/form_access', classified: classified
 
     - if classified.class.respond_to?(:acts_as_trackable?)
       = tab 'Tracks' do
