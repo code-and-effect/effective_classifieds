@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    effective_classifieds (0.6.7)
+    effective_classifieds (0.7.0)
       effective_bootstrap
       effective_datatables (>= 4.0.0)
       effective_orders

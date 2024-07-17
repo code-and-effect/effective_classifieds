@@ -27,3 +27,15 @@
         %th Status
         %td
           %span.badge.badge-secondary= classified.status
+
+    - if classified_wizard.price_category.present?
+      %tr
+        %th Price Category
+        %td= classified_wizard.price_category
+
+    - if classified_wizard.user.present?
+      %tr
+        %th Member
+        %td
+          = classified_wizard.user
+          %small= masked_email(classified_wizard.user)

@@ -97,6 +97,8 @@ ActiveRecord::Schema.define(version: 101) do
     t.text "status_steps"
     t.text "wizard_steps"
     t.datetime "submitted_at"
+    t.integer "user_id"
+    t.string "user_type"
     t.string "price_category"
     t.datetime "updated_at"
     t.datetime "created_at"

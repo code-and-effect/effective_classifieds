@@ -39,9 +39,12 @@ module EffectiveClassifiedsClassifiedWizard
 
     log_changes(except: :wizard_steps) if respond_to?(:log_changes)
 
-    # Application Namespace
+    # Application Namespace. This is who is checking out the classified wizard
     belongs_to :owner, polymorphic: true
     accepts_nested_attributes_for :owner
+
+    # Can be used for member-only pricing. The member.
+    belongs_to :user, polymorphic: true, optional: true
 
     # Effective Namespace
     has_many :classifieds, class_name: 'Effective::Classified', inverse_of: :classified_wizard, dependent: :destroy
@@ -53,7 +56,7 @@ module EffectiveClassifiedsClassifiedWizard
       status_steps           :text, permitted: false
 
       # Dates
-      submitted_at           :datetime
+      submitted_at           :datetime, permitted: false
 
       # Pricing
       price_category          :string

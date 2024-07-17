@@ -63,6 +63,8 @@ class CreateEffectiveClassifieds < ActiveRecord::Migration[6.0]
       t.datetime :submitted_at
 
       # Pricing
+      t.integer :user_id
+      t.string :user_type
       t.string :price_category
 
       t.datetime :updated_at
