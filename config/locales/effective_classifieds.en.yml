@@ -5,5 +5,5 @@ en:
   activerecord:
     models:
       # These ones might be app level
-      app/classified_wizard: 'Classified Posting Submission'
-      effective/classified: 'Classified Posting'
+      app/classified_wizard: 'Classified Submission'
+      effective/classified: 'Classified'

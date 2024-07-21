@@ -1,46 +1,36 @@
 = render 'layout' do
   .effective-classified
     - unless @classified.published?
-      .alert.alert-warning.mb-4 This #{etd(@classified)} is not published.
+      .alert.alert-warning.mb-4 This #{classified_label} is not published.
 
+    %h1.effective-title.mb-4= @page_title
 
-    .resource-buttons
-      = link_to "Return to  #{classifieds_name_label}", effective_classifieds.classifieds_path, class: 'btn btn-secondary'
+    .row
+      .col-md
+        %table.table.table-striped.effective-table-summary
+          %tr
+            %th Company
+            %td= @classified.organization
 
-    = card do
-      .row
-        .col-md
-          %table.table.table-striped.table-hover.effective-table-summary
-            %tr
-              %th Position
-              %td= @classified.title
-
-            %tr
-              %th Company
-              %td= @classified.organization
-
-              - if @classified.location.present?
-                %tr
-                  %th Location
-                  %td= @classified.location
-
-        .col-md
-          %table.table.table-striped.table-hover.effective-table-summary
-            %tr
-              %th Published
-              %td #{@classified.start_on&.strftime("%b %d, %Y")}
-
-            %tr
-              %th Closing
-              %td #{@classified.end_on&.strftime("%b %d, %Y")}
-
-            - if @classified.file.attached?
+            - if @classified.location.present?
               %tr
-                %th Attachment
-                %td= link_to(@classified.file.filename, main_app.url_for(@classified.file), target: '_blank')
+                %th Location
+                %td= @classified.location
+
+          %tr
+            %th Posted
+            %td #{@classified.start_on&.strftime("%b %d, %Y")}
+
+          %tr
+            %th Closing
+            %td #{@classified.end_on&.strftime("%b %d, %Y")}
+
+          - if @classified.file.attached?
+            %tr
+              %th Attachment
+              %td= link_to(@classified.file.filename, main_app.url_for(@classified.file), target: '_blank')
 
     .body.mt-4
       = @classified.body.to_s
 
-    .resource-buttons.mt-5.mb-4
-      = link_to "Return to  #{classifieds_name_label}", effective_classifieds.classifieds_path, class: 'btn btn-secondary'
+    = link_to "&larr; #{classifieds_name_label}".html_safe, effective_classifieds.classifieds_path, class: 'btn btn-secondary my-4'

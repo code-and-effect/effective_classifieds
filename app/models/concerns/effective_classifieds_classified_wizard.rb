@@ -28,7 +28,7 @@ module EffectiveClassifiedsClassifiedWizard
 
     acts_as_wizard(
       start: 'Start',
-      classified: 'Posting',
+      classified: I18n.t('activerecord.models.effective/classified') + ' Details',
       summary: 'Review',
       billing: 'Billing Address',
       checkout: 'Checkout',

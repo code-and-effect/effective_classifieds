@@ -1,20 +1,20 @@
 %p Hello Admin!
 
 - if @classified.published?
-  %p The following posting has been submitted and is published online:
+  %p The following has been submitted and is published online:
 - else
-  %p The following posting has been submitted and is awaiting your approval:
+  %p The following has been submitted and is awaiting your approval:
 
 %hr
 
 = render('effective/classifieds/classified', classified: @classified) do
-  %p= @classified.body
+  %div= @classified.body
 
 %hr
 
 - unless @classified.approved?
-  %p= link_to('Approve Posting', effective_classifieds.edit_admin_classified_path(@classified))
+  %p= link_to("Approve", effective_classifieds.edit_admin_classified_path(@classified))
 
-%p= link_to('View Posting', effective_classifieds.classified_path(@classified))
+%p= link_to("View", effective_classifieds.classified_path(@classified))
 
 %p Have a great day!

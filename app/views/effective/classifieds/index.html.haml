@@ -1,21 +1,24 @@
 = render 'layout' do
-  .resource-buttons
-    = link_to "Submit New #{et(Effective::Classified)}", effective_classifieds.new_classified_wizard_path, class: 'btn btn-primary'
+  .row
+    .col
+      %h1.effective-title.mb-4= @page_title
+
+    .col-auto.text-right
+      = link_to "Post a #{classified_label}", effective_classifieds.new_classified_wizard_path, class: 'btn btn-primary'
 
   - if @classifieds.present?
     .table-responsive
-      %table.table.table-striped.table-hover
-        %tr
-          %th.col-date Published
-          %th.col-date.d-none.d-md-table-cell Closing
-          %th Title
-          %th.d-none.d-md-table-cell Location
+      %table.table.table-striped
+        %thead
+          %tr
+            %th.col-date.text-right Posted
+            %th Title
+            %th.d-none.d-md-table-cell Location
+            -# %th.col-date.d-none.d-md-table-cell.text-right Closing
 
-        = render @classifieds
-
-    .resource-buttons
-      = link_to "Submit New #{et(Effective::Classified)}", effective_classifieds.new_classified_wizard_path, class: 'btn btn-primary'
+        %tbody
+          = render @classifieds
 
   - else
-    = card class: 'mt-5' do
-      %p.text-center There are no active #{etsd(Effective::Classified)}. When there are, we'll show them here.
+    .alert.alert-warning.mb-3
+      There are no active #{classifieds_label.downcase}.

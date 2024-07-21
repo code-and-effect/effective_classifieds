@@ -10,6 +10,6 @@
       = f.fields_for(:owner, f.object.owner) do |fo|
         = effective_address_fields(fo, :billing)
 
-      %p.text-muted * Not all postings require a fee and we ask for a billing address for future use.
+      %p.text-muted * Not all #{classified_label} require a fee. We ask for your billing address for future use.
 
       = f.save 'Save and Continue'

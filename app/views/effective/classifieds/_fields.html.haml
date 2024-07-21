@@ -1,7 +1,7 @@
 = f.select :category, EffectiveClassifieds.categories, required: true, include_blank: false
-= f.text_field :title
-= f.text_field :organization, hint: 'Organization or company name'
-= f.text_field :location
+= f.text_field :title, label: "#{classified_label} title"
+= f.text_field :location, label: "#{classified_label} location"
+= f.text_field :organization
 
 - if f.object.persisted? || f.object.errors.include?(:slug)
   - current_url = (effective_classifieds.classified_url(f.object) rescue nil)
@@ -12,26 +12,25 @@
 .row
   .col-lg-6
     - if f.object.new_record?
-      = f.date_field :start_on, label: "Start", hint: "The posting will be displayed starting after this date.", input_js: { minDate: minDate.strftime('%F') }
+      = f.date_field :start_on, label: "Start date", hint: "If approved, this #{classified_label.downcase} will be displayed on the #{classifieds_name_label.downcase} after this date.", input_js: { minDate: minDate.strftime('%F') }
     - else
-      = f.date_field :start_on, label: "Start", hint: 'The posting will be displayed starting after this date.'
+      = f.date_field :start_on, label: "Start date", hint: "The #{classified_label.downcase} will be displayed starting after this date."
 
   .col-lg-6
-    = f.date_field :end_on, label: "Expire", hint: "The posting will no longer be displayed after this date. Please enter a date within #{f.object.end_on_distance} of start date"
+    = f.date_field :end_on, label: "Close date", hint: "The #{classified_label.downcase} will no longer be displayed on the #{classifieds_name_label.downcase} after this date. Please enter a date within #{f.object.end_on_distance} of the start date."
 
-- if f.object.persisted? && !f.object.draft?
-  = f.check_box :archived, label: 'Yes, this posting is archived. It will not be displayed.'
+-# - if f.object.persisted? && !f.object.draft?
+-#   = f.check_box :archived, label: 'Yes, this posting is archived. It will not be displayed.'
 
 - if defined?(EffectiveArticleEditor)
-  = f.article_editor :body, label: 'Description', hint: 'The content of your posting. Be sure to include all relevant information.'
+  = f.article_editor :body, label: 'Description', hint: "The #{classified_label.downcase} description - be sure to include all relevant information!"
 - else
-  = f.rich_text_area :body, label: 'Description', hint: 'The content of your posting. Be sure to include all relevant information.'
+  = f.rich_text_area :body, label: 'Description', hint: "The #{classified_label.downcase} description. Be sure to include all relevant information."
 
-= f.file_field :file, hint: 'Optionally attach a PDF for this posting'
+= f.file_field :file, label: "Attach a PDF for download. Optional."
 
-%h2.mt-5.mb-0 Contact Information
-%p
-  %small.text-muted The following contact information is not displayed to the public and is only used by staff to provide support.
+%h3.mt-5 Contact Information
+%p.text-muted These details <strong>are not</strong> displayed on the #{classifieds_name_label}. They may be used by staff for administration and support. Please ensure the above #{classified_label.downcase} description includes relavent contact information.
 
 = f.text_field :contact_name
 = f.url_field :website

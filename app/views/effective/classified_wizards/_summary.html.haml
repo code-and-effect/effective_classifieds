@@ -9,7 +9,7 @@
         - if classified&.published?
           = link_to(classified, effective_classifieds.classified_path(classified), target: '_blank')
         - else
-          = classified.presence || 'Posting was deleted'
+          = classified.presence || "#{classified_label} was deleted"
 
     - if request.path.start_with?('/admin')
       %tr
