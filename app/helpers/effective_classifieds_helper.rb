@@ -5,12 +5,12 @@ module EffectiveClassifiedsHelper
     et('effective_classifieds.name')
   end
 
-  # Job Board Posting or Classified Posting
+  # Job or Classified
   def classified_label
     et(Effective::Classified)
   end
 
-  # Job Board Postings or Classified Postings
+  # Jobs or Classifieds
   def classifieds_label
     ets(Effective::Classified)
   end
