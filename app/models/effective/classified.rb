@@ -170,7 +170,7 @@ module Effective
     def published?
       return false unless approved?
       return false if archived?
-      return false if start_on.blank? || (Time.zone.now < start_on)
+      return false if start_on.blank? || (Time.zone.now.beginning_of_day < start_on)
       return false if end_on.present? && (Time.zone.now >= end_on)
       true
     end

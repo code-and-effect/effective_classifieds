@@ -1,7 +1,7 @@
 %tr
   %td.col-date.text-right= classified.start_on&.strftime("%b %e, %Y")
   %td
-    %strong= link_to classified.title, effective_classifieds.classified_path(classified)
+    %strong= link_to classified.title, effective_classifieds.classified_url(classified)
     .text-muted= classified.organization
     .d-block.d-md-none= classified.location
 
