@@ -112,6 +112,10 @@ module Effective
       self.owner ||= current_user
     end
 
+    before_validation(if: -> { EffectiveClassifieds.default_qb_item_name.present? }) do
+      assign_attributes(qb_item_name: EffectiveClassifieds.default_qb_item_name) if qb_item_name.blank?
+    end
+
     # Automatically approve submissions created by admins outside the submissions wizard
     before_validation(if: -> { new_record? && classified_wizard.blank? }) do
       assign_attributes(status: :approved, price: 0)

@@ -1,4 +1,7 @@
 = f.select :category, EffectiveClassifieds.categories, required: true, include_blank: false
+
+= render 'effective/classifieds/qb_item_name_field', f: f
+
 = f.text_field :title, label: "#{classified_label} title"
 = f.text_field :location, label: "#{classified_label} location"
 = f.text_field :organization

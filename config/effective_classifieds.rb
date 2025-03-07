@@ -24,6 +24,9 @@ EffectiveClassifieds.setup do |config|
   # Can checkout with phone or cheque 'deferred' payment providers
   config.skip_deferred = true
 
+  # Default QB Item Name
+  # config.default_qb_item_name = 'Job Board'
+
   # Mailer Settings
   # Please see config/initializers/effective_resources.rb for default effective_* gem mailer settings
   #

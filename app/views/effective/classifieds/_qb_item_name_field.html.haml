@@ -1,0 +1,6 @@
+- if EffectiveOrders.use_item_names? && EffectiveClassifieds.default_qb_item_name.blank?
+  - if controller_path.include?('admin/') && EffectiveResources.authorized?(self, :admin, :effective_classifieds)
+    .row
+      .col-md-6= qb_item_name_field(f)
+
+
