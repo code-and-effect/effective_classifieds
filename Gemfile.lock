@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    effective_classifieds (0.7.0)
+    effective_classifieds (0.8.4)
       effective_bootstrap
       effective_datatables (>= 4.0.0)
       effective_orders
@@ -112,7 +112,7 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
-    effective_addresses (1.11.4)
+    effective_addresses (1.11.5)
       carmen
       coffee-rails
       effective_resources
@@ -142,7 +142,7 @@ GEM
       effective_resources
       liquid
       rails
-    effective_orders (6.13.3)
+    effective_orders (6.23.0)
       coffee-rails
       effective_addresses
       effective_bootstrap
