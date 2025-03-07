@@ -50,6 +50,9 @@ module Admin
 
       col :purchased_order, visible: false
 
+      col :qb_item_name, label: qb_item_name_label, search: Effective::ItemName.sorted.map(&:to_s), 
+        visible: EffectiveOrders.use_item_names? && EffectiveClassifieds.default_qb_item_name.blank?
+
       actions_col do |classified|
         dropdown_link_to("View #{classified_label}", effective_classifieds.classified_path(classified), target: '_blank')
       end
