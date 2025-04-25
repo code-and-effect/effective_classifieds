@@ -45,6 +45,8 @@ class CreateEffectiveClassifieds < ActiveRecord::Migration[6.0]
 
     add_index :classifieds, [:owner_id, :owner_type]
     add_index :classifieds, :slug
+    add_index :classifieds, :classified_wizard_id, if_not_exists: true
+    add_index :classifieds, :archived, if_not_exists: true
 
     create_table :classified_wizards do |t|
       t.string :token
