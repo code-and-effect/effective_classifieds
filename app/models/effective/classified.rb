@@ -21,6 +21,8 @@ module Effective
     belongs_to :classified_wizard, polymorphic: true, optional: true
 
     has_one_attached :file
+    has_one_purgable :file
+
     has_rich_text :body
 
     acts_as_statused(
