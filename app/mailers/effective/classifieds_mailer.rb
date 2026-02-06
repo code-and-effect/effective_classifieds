@@ -7,7 +7,7 @@ module Effective
       raise('expected an Effective::Classified') unless resource.kind_of?(Effective::Classified)
 
       @classified = resource
-      subject = subject_for(__method__, 'Classified Submitted', resource, opts)
+      subject = subject_for(__method__, "#{EffectiveResources.et(resource)} Submitted", resource, opts)
       headers = headers_for(resource, opts)
 
       mail(to: mailer_admin, subject: subject, **headers)
