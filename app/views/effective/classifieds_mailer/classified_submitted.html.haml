@@ -9,8 +9,21 @@
 
 %hr
 
-= render('effective/classifieds/classified', classified: @classified) do
-  %div= @classified.body
+%h3= @classified.title
+%p= @classified.category
+%p= @classified.organization
+%p= @classified.location
+%p= @classified.body
+
+- if @classified.start_on.present?
+  %p
+    %strong Start:
+    = @classified.start_on.strftime("%b %e, %Y")
+
+- if @classified.end_on.present?
+  %p
+    %strong End:
+    = @classified.end_on.strftime("%b %e, %Y")
 
 %hr
 
