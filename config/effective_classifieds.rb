@@ -2,6 +2,9 @@ EffectiveClassifieds.setup do |config|
   # Every classified must have a category.
   config.categories = ['Job', 'Equipment Sales', 'Other']
 
+  # Handles salary disclosure mode. Valid options are :bc, :on, and false
+  config.salary_disclosure = false
+
   # Layout Settings
   # Configure the Layout per controller, or all at once
   # config.layout = { application: 'application', admin: 'admin' }

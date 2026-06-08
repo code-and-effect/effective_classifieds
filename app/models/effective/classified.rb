@@ -46,6 +46,8 @@ module Effective
       start_on           :date
       end_on             :date
 
+      salary_disclosure  :text
+
       # Acts as Slugged
       slug               :string
 
@@ -68,8 +70,8 @@ module Effective
 
     scope :sorted, -> { order(start_on: :desc) }
 
-    scope :deep, -> { 
-      with_rich_text_body.with_attached_file.includes(:classified_wizard, :owner, :purchased_order) 
+    scope :deep, -> {
+      with_rich_text_body.with_attached_file.includes(:classified_wizard, :owner, :purchased_order)
     }
 
     scope :upcoming, -> { where(arel_table[:end_on].gt(Time.zone.now)) }

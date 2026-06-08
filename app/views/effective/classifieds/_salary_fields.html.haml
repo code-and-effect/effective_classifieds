@@ -1,0 +1,13 @@
+- # Salary disclosure. Override this partial per tenant to customize the wording or layout.
+
+- if EffectiveClassifieds.salary_disclosure == :bc
+  - collection = ['Salary range is included in the job posting details']
+
+  = f.radios :salary_disclosure, collection, required: true,
+    hint: "The Pay Transparency Act (PTA) requires firms to disclose salary range on job postings."
+
+- if EffectiveClassifieds.salary_disclosure == :on
+  - collection = ['Salary range is included in the job posting details', 'Does not apply - our firm employs fewer than 25 people']
+
+  = f.radios :salary_disclosure, collection, required: true,
+    hint: "The Employment Standards Act (ESA) requires firms with more than 25 employees to disclose salary range on job postings."
