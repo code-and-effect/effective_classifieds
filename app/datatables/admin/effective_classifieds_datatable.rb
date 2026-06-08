@@ -34,6 +34,8 @@ module Admin
       col :body, visible: false
       col :slug, visible: false
 
+      col :salary_disclosure, visible: false
+
       col :organization
       col :location
 
@@ -50,7 +52,7 @@ module Admin
 
       col :purchased_order, visible: false
 
-      col :qb_item_name, label: qb_item_name_label, search: Effective::ItemName.sorted.map(&:to_s), 
+      col :qb_item_name, label: qb_item_name_label, search: Effective::ItemName.sorted.map(&:to_s),
         visible: EffectiveOrders.use_item_names? && EffectiveClassifieds.default_qb_item_name.blank?
 
       actions_col do |classified|

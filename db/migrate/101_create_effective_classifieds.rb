@@ -18,6 +18,8 @@ class CreateEffectiveClassifieds < ActiveRecord::Migration[6.0]
       t.string :email
       t.string :phone
 
+      t.text :salary_disclosure
+
       t.datetime :start_on
       t.datetime :end_on
 

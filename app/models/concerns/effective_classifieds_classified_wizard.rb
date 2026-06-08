@@ -83,6 +83,13 @@ module EffectiveClassifiedsClassifiedWizard
       validates :classified, presence: true
     end
 
+    validate(if: -> { current_step == :classified && classified.present? && EffectiveClassifieds.salary_disclosure }) do
+      if classified.salary_disclosure.blank?
+        classified.errors.add(:salary_disclosure, "can't be blank")
+        errors.add(:classified, "is invalid")
+      end
+    end
+
     # All Fees and Orders
     def submit_fees
       classifieds

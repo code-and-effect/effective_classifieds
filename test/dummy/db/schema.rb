@@ -124,6 +124,7 @@ ActiveRecord::Schema[8.1].define(version: 101) do
     t.integer "purchased_order_id"
     t.string "qb_item_name"
     t.integer "roles_mask"
+    t.text "salary_disclosure"
     t.string "slug"
     t.datetime "start_on", precision: nil
     t.string "status"
