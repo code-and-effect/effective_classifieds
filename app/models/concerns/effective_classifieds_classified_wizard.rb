@@ -73,6 +73,9 @@ module EffectiveClassifiedsClassifiedWizard
     scope :in_progress, -> { where.not(status: [:submitted]) }
     scope :done, -> { where(status: [:submitted]) }
 
+    # Records safe to purge via the purge_resources task: draft, unpaid, untouched for over a year.
+    scope :purgable, -> { draft.not_purchased.where(arel_table[:updated_at].lt(1.year.ago)) }
+
     scope :for, -> (user) { where(owner: user) }
 
     # All Steps validations
