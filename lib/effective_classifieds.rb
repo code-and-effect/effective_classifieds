@@ -19,7 +19,7 @@ module EffectiveClassifieds
   include EffectiveGem
 
   def self.ClassifiedWizard
-    classified_wizard_class_name&.constantize || Effective::ClassifiedWizard
+    klass(:classified_wizard)
   end
 
   def self.mailer_class
