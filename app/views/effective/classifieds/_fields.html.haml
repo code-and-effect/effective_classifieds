@@ -29,7 +29,7 @@
 - else
   = f.rich_text_area :body, label: 'Description', hint: "The #{classified_label.downcase} description. Be sure to include all relevant information."
 
-= f.file_field :file, label: "Attach a PDF for download. Optional."
+= f.file_field :file, label: "Attach a PDF for download. Optional.", accept: 'application/pdf'
 
 %h3.mt-5 Contact Information
 %p.text-muted These details <strong>are not</strong> displayed on the #{classifieds_name_label}. They may be used by staff for administration and support. Please ensure the above #{classified_label.downcase} description includes relavent contact information.
