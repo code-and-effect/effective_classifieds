@@ -8,6 +8,13 @@ module Effective
       @page_title ||= view_context.classifieds_name_label
 
       @classifieds = ::Effective::Classified.classifieds(user: current_user).sorted
+      @classifieds_count = @classifieds.count
+      page = EffectiveResources.validate_page!(
+        params[:page],
+        collection_count: @classifieds_count,
+        per_page: EffectiveClassifieds.per_page
+      )
+      @classifieds = @classifieds.paginate(page: page, per_page: EffectiveClassifieds.per_page)
     end
 
     def show

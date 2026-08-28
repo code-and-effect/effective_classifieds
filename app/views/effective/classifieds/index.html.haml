@@ -19,6 +19,9 @@
         %tbody
           = render @classifieds
 
+    %nav.d-flex.justify-content-center
+      = bootstrap_paginate(@classifieds, per_page: EffectiveClassifieds.per_page, collection_count: @classifieds_count)
+
   - else
     .alert.alert-warning.mb-3
       There are no active #{classifieds_label.downcase}.
