@@ -11,7 +11,7 @@
 
     %p
       Please
-      = link_to("Continue submission", effective_classifieds.classified_wizard_build_path(submission, submission.next_step), 'data-turbolinks' => false, class: 'btn btn-primary')
+      = link_to("Continue submission", effective_classifieds.classified_wizard_build_path(submission, submission.next_step), 'data-turbolinks' => false, 'data-turbo' => false, class: 'btn btn-primary')
       or you can
       = link_to('Abandon submission', effective_classifieds.classified_wizard_path(submission), 'data-confirm': "Really delete #{submission}?", 'data-method': :delete, class: 'btn btn-danger')
       to submit another.
